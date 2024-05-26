@@ -6,7 +6,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake_modules)
 
 add_compile_options(-c -Wall -ggdb)
 
-set(SDL2_PATH "C:/Users/malo1/Documents/dev/cpp/libs/SDL2/x86_64-w64-mingw32")
+set(SDL2_PATH ${PROJECT_SOURCE_DIR}/libs/SDL2/x86_64-w64-mingw32)
 
 find_package(SDL2 REQUIRED)
 
