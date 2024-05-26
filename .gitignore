@@ -1,5 +1,4 @@
 .idea/
 .vscode/
 
-cmake-build-debug/
-!cmake-build-debug/SDL2.dll
+cmake-build-debug
