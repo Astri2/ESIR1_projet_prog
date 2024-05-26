@@ -1,4 +1,4 @@
-#include <SDL.h>
+#include "SDL2/SDL.h"
 #include <cstdlib>
 #include <iostream>
 
@@ -72,4 +72,9 @@ int main(int argc, char* argv[])
     SDL_Quit();
 
     return EXIT_SUCCESS;
+}
+
+int WinMain(int argc, char* argv[])
+{
+    return main(argc, argv);
 }
