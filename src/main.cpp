@@ -74,6 +74,7 @@ int main(int argc, char* argv[])
     return EXIT_SUCCESS;
 }
 
-int WinMain(int argc, char* argv[]){
+int WinMain(int argc, char* argv[])
+{
     return main(argc, argv);
 }
