@@ -8,7 +8,7 @@
 #include "renderer.h"
 
 game::game(unsigned int _width, unsigned int _height)
-    : context(_width, _height), p(new player(0, 0, 5, 5)) {}
+    : context(_width, _height), p(new player(0, 0, 5, 5, 5)) {}
 
 game::~game() {
     delete p;

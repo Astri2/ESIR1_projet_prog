@@ -20,7 +20,7 @@ private:
     std::vector<entity *> entities;
     std::vector<interactible *> interactibles;
 
-    std::vector<interactible *> perceive(entity * user);
+    std::vector<interactible *> perceive(player * user);
 
     player * p;
 };

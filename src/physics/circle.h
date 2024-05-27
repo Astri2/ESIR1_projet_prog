@@ -3,6 +3,8 @@
 //
 #pragma once
 
+#include "utils/vec2.h"
+
 struct circle {
     float rayon;
     vec2 position;

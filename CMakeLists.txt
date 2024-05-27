@@ -45,7 +45,6 @@ set(exec
         src/renderer.h
         src/renderer.cpp
         src/color.h
-
 )
 
 IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
