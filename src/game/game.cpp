@@ -35,15 +35,14 @@ void game::handle_event(const SDL_Event &event) {
 interactible * game::perceive(const player * user){
     interactible * nearest = nullptr;
 
-    float min_dist = 0;
+    float nearest_dist = 0;
 
     for (interactible * objet : interactibles){
-        if (physics::are_colliding(user->get_interact_zone(), objet->get_interact_zone())){
-            const float actual_dist = user->get_position().distance(objet->get_position());
-            if( nearest == nullptr || actual_dist < min_dist ) {
-                nearest = objet;
-                min_dist = actual_dist;
-            }
+        const float shared_dist = physics::shared_distance(user->get_interact_zone() , objet->get_interact_zone());
+
+        if( shared_dist > nearest_dist ) {
+            nearest = objet;
+            nearest_dist = shared_dist;
         }
     }
 
