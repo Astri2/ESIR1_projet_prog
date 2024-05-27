@@ -4,8 +4,8 @@
 
 #include "physics.h"
 
-void physics::check_and_collide( rigid_body & m_entity, const aabb & collide_box) {
-    aabb entity_box = m_entity.bounding_box;
+void physics::check_and_collide( collidable & m_entity, const aabb & collide_box) {
+    aabb entity_box = m_entity.get_collide_box();
 
     float mx = 0;
     float my = 0;
@@ -27,7 +27,7 @@ void physics::check_and_collide( rigid_body & m_entity, const aabb & collide_box
     m_entity.move(mx,my);
 }
 
-void physics::check_and_collide( rigid_body & m_entity, const std::vector<aabb> & collidables ){
+void physics::check_and_collide( collidable & m_entity, const std::vector<aabb> & collidables ){
     for ( aabb collidable : collidables ) {
         check_and_collide(m_entity,collidable);
     }

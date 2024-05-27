@@ -13,13 +13,9 @@ struct aabb{
     float top;
 };
 
-struct rigid_body{
-    std::vector<int> position;
-    std::vector<int> size;
-
-    aabb bounding_box;
-
-    void move(int x,int y);
+struct collidable{
+    aabb get_collide_box();
+    void move(float x, float y);
 };
 
 class physics {
@@ -27,7 +23,7 @@ class physics {
 public:
     physics();
 
-    void check_and_collide( rigid_body & m_entity, const aabb & collide_box);
+    void check_and_collide( collidable & m_entity, const aabb & collide_box);
 
-    void check_and_collide( rigid_body & m_entity, const std::vector<aabb> & collidables );
+    void check_and_collide( collidable & m_entity, const std::vector<aabb> & collidables );
 };
