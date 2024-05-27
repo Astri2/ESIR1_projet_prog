@@ -25,7 +25,7 @@ private:
     std::vector<entity *> entities;
     std::vector<interactible *> interactibles;
 
-    interactible * game::perceive(const player * user);
+    interactible * perceive(const player * user);
 
     bool running = true;
 
