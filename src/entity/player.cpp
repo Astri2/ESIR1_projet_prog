@@ -14,5 +14,6 @@ void player::draw(){
 }
 
 void player::update(float dt){
-    move(position.x, position.y);
+    const float speed = 10;
+    move(speed * dt, 0);
 }
