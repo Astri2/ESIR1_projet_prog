@@ -2,23 +2,32 @@
 // Created by tomch on 27/05/2024.
 //
 
+#include "aabb.h"
 #include "physics.h"
 // #include "entity/collidable.h"
 
 bool physics::are_colliding(const aabb & collide_1,const aabb & collide_2){
-    return ( collide_1.left < collide_2.left && collide_2.left < collide_1.right )
-        || ( collide_1.left < collide_2.right && collide_2.right < collide_1.right )
-        || ( collide_1.top < collide_2.bottom && collide_2.bottom < collide_1.bottom )
-        || ( collide_1.top < collide_2.top && collide_2.top < collide_1.bottom )
-    ;
+    return !(
+       collide_1.right < collide_2.left
+    || collide_1.left > collide_2.right
+    || collide_1.top > collide_2.bottom
+    || collide_1.bottom > collide_2.top
+    );
 }
 
 bool physics::are_colliding(const circle & collide_1,const circle & collide_2) {
     return collide_1.position.distance(collide_2.position) < (collide_1.rayon + collide_2.rayon);
 }
 
-void physics::check_and_collide( collidable & m_entity, const aabb & collide_box) {
-    aabb entity_box /* = m_entity.get_collide_box()*/;
+void physics::check_and_collide( entity & m_entity, const vec2 & dpos,const aabb & collide_box) {
+    aabb check = m_entity.get_collide_box() + dpos;
+    if ( !are_colliding(check,collide_box) ){
+        m_entity.move(dpos.x,dpos.y);
+    }
+}
+
+void physics::check_and_collide( entity & m_entity, const aabb & collide_box) {
+    aabb entity_box = m_entity.get_collide_box();
 
     float mx = 0;
     float my = 0;
@@ -40,7 +49,7 @@ void physics::check_and_collide( collidable & m_entity, const aabb & collide_box
     // m_entity.move(mx, my);
 }
 
-void physics::check_and_collide(collidable & m_entity, const std::vector<aabb> & collidables){
+void physics::check_and_collide(entity & m_entity, const std::vector<aabb> & collidables){
     for (aabb collidable : collidables) {
         check_and_collide(m_entity,collidable);
     }
