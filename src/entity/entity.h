@@ -4,7 +4,7 @@
 #pragma once
 
 
-#include "../utils/vec2.h"
+#include "utils/vec2.h"
 
 class entity {
 public :
