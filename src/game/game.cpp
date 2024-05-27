@@ -2,11 +2,15 @@
 // Created by malo1 on 5/27/2024.
 //
 #include "game.h"
+
+#include <iostream>
+
 #include "physics/physics.h"
 #include "renderer.h"
 #include "event.h"
+#include "sprites/sprite.h"
 
-game::game(unsigned int _width, unsigned int _height)
+ game::game(unsigned int _width, unsigned int _height)
     : context(_width, _height), p(new player(0, 0, 5, 5, 5)) {}
 
 game::~game() {
@@ -14,12 +18,23 @@ game::~game() {
 }
 
 void game::run() {
+    vec2 vec;
+     vec.x=1;
+     vec.y=1;
+    sprite test("../resources/grumpy-cat.bmp",vec);
+     int a = test.load_texture();
+     std::cout<<a;
     while(running) {
         event::manager::update();
 
         p->update(0.1);
         renderer::clear(0, 0, 0);
+
+
         p->draw();
+
+
+        test.draw();
         renderer::present();
     }
 }
