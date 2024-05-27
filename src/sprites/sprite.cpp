@@ -9,7 +9,7 @@
 #include "renderer.h"
 
 void sprite::draw() const {
-    renderer::draw_texture(0,0,0,0,texture);
+    renderer::draw_texture(position.x,position.y,size.x,size.y,texture);
 }
 
 sprite::~sprite() {

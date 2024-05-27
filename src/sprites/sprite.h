@@ -11,10 +11,11 @@ protected:
     SDL_Texture* texture;
     const char * image_src;
     vec2 size;
+    vec2 position;
 public:
     int load_texture();
 
-    sprite(const char * src, vec2 size) : image_src(src), size(size) {}
+    sprite(const char * src, vec2 position, vec2 size) : image_src(src),position(position), size(size) {}
 
     void set_texture(SDL_Texture* texture);
 

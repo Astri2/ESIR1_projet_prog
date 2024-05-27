@@ -45,7 +45,9 @@ namespace renderer {
     }
 
     void draw_texture(float x, float y, float width, float height, SDL_Texture* texture) {
-        SDL_RenderCopy(renderer, texture, nullptr, nullptr);
+        SDL_FRect rect { x, y, width, height };
+
+        SDL_RenderCopyF(renderer, texture, nullptr, &rect);
     }
 
     int load_texture(const char * image_src, sprite * sprite_obj) {

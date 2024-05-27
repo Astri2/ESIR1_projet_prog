@@ -21,20 +21,26 @@ void game::run() {
     vec2 vec;
      vec.x=1;
      vec.y=1;
-    sprite test("../resources/grumpy-cat.bmp",vec);
+
+     vec2 vec1;
+     vec1.x=100;
+     vec1.y=100;
+
+    sprite test("../resources/grumpy-cat.bmp",vec,vec1);
+
      int a = test.load_texture();
      std::cout<<a;
+
     while(running) {
         event::manager::update();
 
         p->update(0.1);
         renderer::clear(0, 0, 0);
 
-
         p->draw();
 
-
         test.draw();
+
         renderer::present();
     }
 }
