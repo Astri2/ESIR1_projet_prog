@@ -16,9 +16,6 @@ public :
     void draw() override;
     void update(float dt) override;
 
-    void damage(int damage_value);
-    void benefit(int benefit_value);
-
 private:
     const player * p;
     float current_health;

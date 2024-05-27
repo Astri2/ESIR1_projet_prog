@@ -17,6 +17,5 @@ public:
 protected:
     vec2 position;
     vec2 size;
-    std::string id;
 };
 

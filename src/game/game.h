@@ -25,11 +25,11 @@ private:
     
     std::vector<entity *> entities;
     std::vector<interactible *> interactibles;
+    std::vector<gui_component *> ui_components;
 
     interactible * perceive(const player * user);
 
     bool running = true;
 
     player * p;
-    health_bar * b;
 };

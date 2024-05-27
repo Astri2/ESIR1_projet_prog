@@ -4,8 +4,6 @@
 
 #include "health_bar.h"
 
-#include "health_bar.h"
-
 health_bar::health_bar(player * p, const float x, const float y, const float width, const float height)
         : gui_component(x, y, width, height), p(p), current_health(100.0f), max_health(p->get_max_health()) {}
 
@@ -19,19 +17,5 @@ void health_bar::draw() {
 
 void health_bar::update(float dt) {
     current_health = p->get_current_health();
-}
-
-void health_bar::damage(int damage_value) {
-    current_health -= static_cast<float>(damage_value);
-    if (current_health < 0) {
-        current_health = 0;
-    }
-}
-
-void health_bar::benefit(int benefit_value) {
-    current_health += benefit_value;
-    if (current_health > max_health) {
-        current_health = max_health;
-    }
 }
 

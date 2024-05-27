@@ -44,6 +44,12 @@ set(exec
         src/renderer.h
         src/renderer.cpp
         src/color.h
+
+        src/GUI/health_bar.cpp
+        src/GUI/health_bar.h
+
+        src/GUI/gui_component.cpp
+        src/GUI/gui_component.h
 )
 
 IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
@@ -58,10 +64,6 @@ ELSE()
     set(libs ${PROJECT_SOURCE_DIR}/libs/SDL2/bin/mingw_x64/SDL2.dll)
 ENDIF()
 
-add_executable(projet_programmation ${flags} ${exec}
-        src/GUI/health_bar.cpp
-        src/GUI/health_bar.h
-        src/GUI/gui_component.cpp
-        src/GUI/gui_component.h)
+add_executable(projet_programmation ${flags} ${exec})
 
 target_link_libraries(${PROJECT_NAME} ${libs})
