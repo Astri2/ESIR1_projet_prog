@@ -3,7 +3,7 @@
 //
 #include "entity.h"
 
-entity::entity(float x, float y, float width, float height,)
+entity::entity(float x, float y, float width, float height)
         : position({x, y}), size({width, height}) {}
 
 entity::~entity(){}

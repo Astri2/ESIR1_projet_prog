@@ -35,5 +35,4 @@ ENDIF()
 
 add_executable(projet_programmation ${flags} ${exec})
 
->>>>>>> main
 target_link_libraries(${PROJECT_NAME} ${libs})
