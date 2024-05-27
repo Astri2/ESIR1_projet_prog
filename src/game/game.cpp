@@ -5,12 +5,29 @@
 #include "physics/physics.h"
 #include "renderer.h"
 #include "event.h"
+#include "config.h"
 
 game::game(unsigned int _width, unsigned int _height)
-    : context(_width, _height), p(new player(0, 0, 5, 5, 5)) {}
+    : context(_width, _height), p(new player(0, 0, 5, 5, 5))
+{
+    float cw = config::map::cluster_width;
+    float ch = config::map::cluster_height;
+    // ça devrait se baser sur la map, pas sur la fenetre de jeu
+    this->nb_clusters_x = std::ceil(_width/cw);
+    this->nb_clusters_y = std::ceil(_height/ch);
+    for(unsigned int x = 0; x < this->nb_clusters_x ; x++) {
+        for(unsigned int y = 0 ; y < this->nb_clusters_y ; y++) {
+            this->clusters.push_back(new cluster({y*ch,(x+1)*cw,(y+1)*ch,x*cw}));
+        }
+    }
+    //might be worth storing it inside entity
+    unsigned int player_cluster_idx = find_cluster_idx(p);
+    clusters[player_cluster_idx]->get_entities().insert(p);
+}
 
 game::~game() {
     delete p;
+    for(cluster* c : clusters) delete c;
 }
 
 void game::run() {
@@ -34,17 +51,50 @@ void game::handle_event(const SDL_Event &event) {
 
 interactible * game::perceive(const player * user){
     interactible * nearest = nullptr;
-
     float nearest_dist = 0;
 
-    for (interactible * objet : interactibles){
-        const float shared_dist = physics::shared_distance(user->get_interact_zone() , objet->get_interact_zone());
+    for(cluster* c : get_surrounding_clusters(find_cluster_idx(user))) {
+        for (interactible * objet : c->get_interactibles()){
+            const float shared_dist = physics::shared_distance(user->get_interact_zone() , objet->get_interact_zone());
 
-        if( shared_dist > nearest_dist ) {
-            nearest = objet;
-            nearest_dist = shared_dist;
+            if( shared_dist > nearest_dist ) {
+                nearest = objet;
+                nearest_dist = shared_dist;
+            }
         }
     }
 
     return nearest;
+}
+
+unsigned int game::find_cluster_idx(const vec2& position) const {
+    return ((int)position.y/config::map::cluster_height)*this->nb_clusters_x + ((int)position.x/config::map::cluster_width);
+}
+
+std::vector<cluster*> game::get_surrounding_clusters(unsigned int cluster_idx) {
+    std::vector<cluster*> res;
+    for(int i = -1 ; i < 2 ; i++) {
+        for(int j = -1 ; j < 2 ; j++) {
+            unsigned int idx = cluster_idx + i * this->nb_clusters_x + j;
+            // assuming negatives values aren't to negatives, could use boolean logic in for boundaries instead
+            if(idx < this->nb_clusters_x * this->nb_clusters_y)
+                res.push_back(clusters[idx]);
+        }
+    }
+    return res;
+}
+
+std::vector<cluster *> game::get_cluster_to_blit(camera *camera) {
+    std::vector<cluster*> res;
+
+    // computes the rectangle of clusters that should be blit, given the top_left and bottom_right clusters
+    unsigned int top_left_cluster_idx = find_cluster_idx({camera->get_outer_range().top_left()});
+    unsigned int bottom_right_cluster_idx = find_cluster_idx({camera->get_outer_range().bottom_right()});
+    for(int i = 0 ; i < (bottom_right_cluster_idx-top_left_cluster_idx)/this->nb_clusters_x ; i++) {
+        for(int j = 0 ; j < (bottom_right_cluster_idx-top_left_cluster_idx)%this->nb_clusters_x ; j++) {
+            unsigned int idx = top_left_cluster_idx + i * this->nb_clusters_x + j;
+            res.push_back(clusters[idx]);
+        }
+    }
+    return res;
 }
