@@ -5,10 +5,10 @@
 #include "game.h"
 
 game::game(unsigned int _width, unsigned int _height)
-    : context(_width, _height), player(0, 0, 5, 5) {}
+    : context(_width, _height), p(new player(0, 0, 5, 5)) {}
 
 game::~game() {
-    delete player;
+    delete p;
 }
 
 void game::run() {
@@ -22,7 +22,7 @@ void game::gameLoop() {
         // SDL_RenderFillRect(renderer, &rect);
         // SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         // SDL_RenderPresent(renderer);
-        player->draw(renderer);
-        player->update(0.1);
+        p->draw(renderer);
+        p->update(0.1);
     }
 }

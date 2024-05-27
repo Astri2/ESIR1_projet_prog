@@ -14,5 +14,5 @@ public:
     void run();
 private:
     void gameLoop();
-    player * player;
+    player * p;
 };
