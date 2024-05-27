@@ -35,6 +35,11 @@ set(exec
         src/entity/interactible.h
         src/entity/interactible.h
 
+        src/camera.cpp
+        src/camera.h
+        src/utils/vec2.h
+
+
         src/renderer.h
         src/renderer.cpp
         src/color.h
