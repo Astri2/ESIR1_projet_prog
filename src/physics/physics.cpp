@@ -14,7 +14,7 @@ bool physics::are_colliding(const aabb & collide_1,const aabb & collide_2){
 }
 
 bool physics::are_colliding(const circle & collide_1,const circle & collide_2) {
-    return collide_1.position.distance(collide_2.position) < collide_1.rayon + collide_2.rayon;
+    return collide_1.position.distance(collide_2.position) < (collide_1.rayon + collide_2.rayon);
 }
 
 void physics::check_and_collide( collidable & m_entity, const aabb & collide_box) {
