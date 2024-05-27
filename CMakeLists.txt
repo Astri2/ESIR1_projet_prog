@@ -27,6 +27,9 @@ set(exec
 
         src/entity/entity.h
         src/entity/entity.cpp
+        src/camera.cpp
+        src/camera.h
+        src/utils/vec2.h
 )
 
 IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
