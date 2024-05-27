@@ -34,6 +34,10 @@ set(exec
         src/entity/player.h
         src/entity/player.cpp
 
+        src/camera.cpp
+        src/camera.h
+        src/utils/vec2.h
+
         src/renderer.h
         src/renderer.cpp
         src/color.h
@@ -51,8 +55,6 @@ ELSE()
     set(libs ${PROJECT_SOURCE_DIR}/libs/SDL2/bin/mingw_x64/SDL2.dll)
 ENDIF()
 
-add_executable(projet_programmation ${flags} ${exec}
-        src/entity/player.cpp
-        src/entity/player.h)
+add_executable(projet_programmation ${flags} ${exec})
 
 target_link_libraries(${PROJECT_NAME} ${libs})

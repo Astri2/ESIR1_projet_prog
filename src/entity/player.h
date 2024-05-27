@@ -8,7 +8,7 @@
 class player : public entity {
 public :
     player(float x, float y, float width, float height);
-    ~player();
-    void draw();
-    void update(float dt) override;
+    virtual ~player() override;
+    virtual void draw() override;
+    virtual void update(float dt) override;
 };
