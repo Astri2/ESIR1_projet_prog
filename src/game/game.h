@@ -4,7 +4,11 @@
 
 #pragma once
 
+#include <vector>
 #include "context.h"
+#include "../entity/entity.h"
+#include "../entity/interactible.h"
+
 
 class game: public context {
 public:
@@ -12,5 +16,11 @@ public:
 
     void run();
 private:
+
+    std::vector<entity *> entities;
+    std::vector<interactible *> interactibles;
+
+    std::vector<interactible *> perceive(entity * user);
+
     void gameLoop();
 };

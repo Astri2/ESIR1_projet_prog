@@ -3,6 +3,7 @@
 //
 
 #include "game.h"
+#include "../physics/physics.h"
 
 game::game(unsigned int _width, unsigned int _height) : context(_width, _height) {}
 
@@ -18,4 +19,16 @@ void game::gameLoop() {
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderPresent(renderer);
     }
+}
+
+std::vector<interactible *> game::perceive(player * user){
+    std::vector<interactible *> interactibles_filtered;
+
+    for (interactible * objet : interactibles){
+        if (physics::are_colliding(user->get_interact_zone(), objet->get_interact_zone())){
+            interactibles.push_back(objet);
+        }
+    }
+
+    return interactibles;
 }
