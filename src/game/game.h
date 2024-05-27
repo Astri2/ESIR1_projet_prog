@@ -6,8 +6,8 @@
 
 #include <vector>
 #include "context.h"
-#include "../entity/entity.h"
-#include "../entity/interactible.h"
+#include "entity/entity.h"
+#include "entity/interactible.h"
 
 
 class game: public context {

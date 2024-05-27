@@ -2,7 +2,7 @@
 // Created by malo1 on 5/27/2024.
 //
 #include "game.h"
-#include "../physics/physics.h"
+#include "physics/physics.h"
 
 #include "color.h"
 #include "renderer.h"

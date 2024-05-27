@@ -5,7 +5,7 @@
 #pragma once
 
 #include "entity.h"
-#include "../physics/circle.h"
+#include "physics/circle.h"
 
 class interactible : public entity {
 protected:
