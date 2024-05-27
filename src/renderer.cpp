@@ -44,10 +44,12 @@ namespace renderer {
         SDL_RenderFillRectF(renderer, &rect);
     }
 
-    void draw_texture(float x, float y, float width, float height, SDL_Texture* texture) {
-        SDL_FRect rect { x, y, width, height };
+    void draw_texture(float x, float y, float width, float height,int res_x,int res_y, SDL_Texture* texture, int frame) {
 
-        SDL_RenderCopyF(renderer, texture, nullptr, &rect);
+        SDL_Rect rect1 { frame*res_x, 0, (frame+1)*res_x, res_y };
+        SDL_FRect rect2 { x, y, width, height };
+
+        SDL_RenderCopyF(renderer, texture, &rect1, &rect2);
     }
 
     int load_texture(const char * image_src, sprite * sprite_obj) {

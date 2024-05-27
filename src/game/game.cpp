@@ -22,11 +22,15 @@ void game::run() {
      vec.x=1;
      vec.y=1;
 
+     vec2 vec0;
+     vec0.x=48;
+     vec0.y=48;
+
      vec2 vec1;
      vec1.x=100;
      vec1.y=100;
 
-    sprite test("../resources/grumpy-cat.bmp",vec,vec1);
+    sprite test("../resources/test.bmp",vec,vec1,vec0,4);
 
      int a = test.load_texture();
      std::cout<<a;
@@ -35,6 +39,9 @@ void game::run() {
         event::manager::update();
 
         p->update(0.1);
+
+        test.update(0.025);
+
         renderer::clear(0, 0, 0);
 
         p->draw();
