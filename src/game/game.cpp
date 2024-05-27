@@ -25,7 +25,8 @@ void game::run() {
         p->update(0.1);
         for (auto component : ui_components) {
             component->update(0.1);
-        }        renderer::clear(0, 0, 0);
+        }
+        renderer::clear(0, 0, 0);
         p->draw();
         for (auto component : ui_components) {
             component->draw();
