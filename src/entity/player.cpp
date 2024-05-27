@@ -1,8 +1,8 @@
 //
 // Created by celia on 27/05/2024.
 //
+#include <algorithm>
 #include "player.h"
-#include "../GUI/health_bar.h"
 #include "renderer.h"
 
 player::player(float x, float y, float width, float height, int max_health, float interact_r)
@@ -27,17 +27,11 @@ void player::update(float dt){
 }
 
 void player::damage(int damage_value) {
-    current_health -= damage_value;
-    if (current_health < 0) {
-        current_health = 0;
-    }
+    current_health = std::max(current_health-damage_value, static_cast<uint32_t>(0));
 }
 
 void player::benefit(int benefit_value) {
-    current_health += benefit_value;
-    if (current_health > max_health) {
-        current_health = max_health;
-    }
+    current_health = std::min(benefit_value + current_health, max_health);
 }
 
 int player::get_max_health() const {

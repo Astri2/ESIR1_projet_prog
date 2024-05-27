@@ -5,7 +5,7 @@
 
 #include "gui_component.h"
 #include "renderer.h"
-#include "../entity/player.h"
+#include "entity/player.h"
 
 class health_bar : public gui_component {
 public :
