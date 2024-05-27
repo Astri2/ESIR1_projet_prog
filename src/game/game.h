@@ -10,6 +10,7 @@
 #include <SDL2/SDL_events.h>
 #include "event.h"
 #include "entity/player.h"
+#include "GUI/health_bar.h"
 
 class game: public context, public event::listener {
 public:
@@ -30,4 +31,5 @@ private:
     bool running = true;
 
     player * p;
+    health_bar * b;
 };

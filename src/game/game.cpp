@@ -7,10 +7,11 @@
 #include "event.h"
 
 game::game(unsigned int _width, unsigned int _height)
-    : context(_width, _height), p(new player(0, 0, 5, 5, 5)) {}
+    : context(_width, _height), p(new player(0, 0, 5, 5, 100, 5)), b(new health_bar(p, 220, 20, 200, 15)) {}
 
 game::~game() {
     delete p;
+    delete b;
 }
 
 void game::run() {
@@ -18,8 +19,10 @@ void game::run() {
         event::manager::update();
 
         p->update(0.1);
+        b->update(0.1);
         renderer::clear(0, 0, 0);
         p->draw();
+        b->draw();
         renderer::present();
     }
 }
