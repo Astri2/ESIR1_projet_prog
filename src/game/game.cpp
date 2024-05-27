@@ -2,10 +2,9 @@
 // Created by malo1 on 5/27/2024.
 //
 #include "game.h"
-
 #include "physics/physics.h"
-#include "color.h"
 #include "renderer.h"
+#include "event.h"
 
 game::game(unsigned int _width, unsigned int _height)
     : context(_width, _height), p(new player(0, 0, 5, 5, 5)) {}
@@ -15,14 +14,22 @@ game::~game() {
 }
 
 void game::run() {
+    while(running) {
+        event::manager::update();
 
-    while(true) {
         p->update(0.1);
         renderer::clear(0, 0, 0);
         p->draw();
         renderer::present();
     }
+}
 
+void game::handle_event(const SDL_Event &event) {
+    switch (event.type) {
+        case SDL_EventType::SDL_QUIT: {
+            running = false;
+        } break;
+    }
 }
 
 std::vector<interactible *> game::perceive(player * user){
