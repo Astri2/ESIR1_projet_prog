@@ -1,3 +1,6 @@
+//
+// Created by cejosso on 27/05/2024.
+//
 #include "entity.h"
 
 entity::entity(float x, float y, float width, float height,)

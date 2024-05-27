@@ -1,3 +1,6 @@
+//
+// Created by cejosso on 27/05/2024.
+//
 # pragma once
 
 class entity {
