@@ -24,5 +24,7 @@ ENDIF()
 
 add_executable(projet_programmation ${exec}
         src/main.cpp
+        src/entity/entity.h
+        src/entity/entity.cpp
 )
 target_link_libraries(${PROJECT_NAME} ${libs})
