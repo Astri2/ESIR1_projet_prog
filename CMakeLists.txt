@@ -11,14 +11,22 @@ set(flags
 )
 
 set(exec
-    src/main.cpp
-    src/event.h
-    src/event.cpp
-    src/physics/physics.h
-    src/physics/physics.cpp
-    src/physics/aabb.h
-    src/entity/entity.h
-    src/entity/entity.cpp
+        src/main.cpp
+
+        src/game/game.h
+        src/game/game.cpp
+
+        src/game/context.h
+        src/game/context.cpp
+
+        src/event.h
+        src/event.cpp
+        src/physics/physics.h
+        src/physics/physics.cpp
+        src/physics/aabb.h
+
+        src/entity/entity.h
+        src/entity/entity.cpp
 )
 
 IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
