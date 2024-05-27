@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 add_compile_options(-c -Wall -ggdb)
 
 include_directories(${PROJECT_SOURCE_DIR}/libs/SDL2/include/)
+include_directories(${PROJECT_SOURCE_DIR}/src/)
 
 set(flags
 )
@@ -27,6 +28,9 @@ set(exec
 
         src/entity/entity.h
         src/entity/entity.cpp
+
+        src/entity/player.h
+        src/entity/player.cpp
 )
 
 IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
@@ -41,6 +45,8 @@ ELSE()
     set(libs ${PROJECT_SOURCE_DIR}/libs/SDL2/bin/mingw_x64/SDL2.dll)
 ENDIF()
 
-add_executable(projet_programmation ${flags} ${exec})
+add_executable(projet_programmation ${flags} ${exec}
+        src/entity/player.cpp
+        src/entity/player.h)
 
 target_link_libraries(${PROJECT_NAME} ${libs})
