@@ -13,6 +13,5 @@ public:
     ~game();
     void run();
 private:
-    void gameLoop();
     player * p;
 };

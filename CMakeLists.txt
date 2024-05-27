@@ -22,8 +22,10 @@ set(exec
 
         src/event.h
         src/event.cpp
+
         src/physics/physics.h
         src/physics/physics.cpp
+
         src/physics/aabb.h
 
         src/entity/entity.h
@@ -31,6 +33,10 @@ set(exec
 
         src/entity/player.h
         src/entity/player.cpp
+
+        src/renderer.h
+        src/renderer.cpp
+        src/color.h
 )
 
 IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")

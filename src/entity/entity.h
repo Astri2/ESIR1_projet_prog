@@ -3,15 +3,13 @@
 //
 # pragma once
 
-#include "SDL2/SDL_render.h"
-
 class entity {
 public :
     entity(float x, float y, float width, float height);
 
     virtual ~entity();
 
-    virtual void draw(SDL_Renderer * renderer) = 0;
+    virtual void draw() = 0;
     virtual void update(float dt) = 0;
 
     void move(float dx, float dy);

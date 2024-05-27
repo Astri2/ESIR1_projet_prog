@@ -9,6 +9,6 @@ class player : public entity {
 public :
     player(float x, float y, float width, float height);
     ~player();
-    void draw(SDL_Renderer * renderer) override;
+    void draw();
     void update(float dt) override;
 };
