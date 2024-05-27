@@ -1,29 +1,17 @@
 //
 // Created by tomch on 27/05/2024.
 //
-
 #pragma once
 
 #include <vector>
 
-struct aabb{
-    float left;
-    float right;
-    float bottom;
-    float top;
-};
+#include "aabb.h"
 
-struct collidable{
-    aabb get_collide_box();
-    void move(float x, float y);
-};
+struct collidable;
 
-class physics {
+namespace physics {
 
-public:
-    physics();
+    void check_and_collide(collidable& entity, aabb const& obstacle);
+    void check_and_collide(collidable& entity, std::vector<aabb> const& obstacles);
 
-    void check_and_collide( collidable & m_entity, const aabb & collide_box);
-
-    void check_and_collide( collidable & m_entity, const std::vector<aabb> & collidables );
-};
+} // namespace physics

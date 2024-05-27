@@ -24,6 +24,8 @@ ENDIF()
 
 add_executable(projet_programmation ${exec}
         src/main.cpp
+        src/physics/physics.h
         src/physics/physics.cpp
+        src/physics/aabb.h
 )
 target_link_libraries(${PROJECT_NAME} ${libs})
