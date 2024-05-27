@@ -46,7 +46,7 @@ void physics::check_and_collide( entity & m_entity, const aabb & collide_box) {
         my = collide_box.bottom - entity_box.top;
     }
 
-    // m_entity.move(mx, my);
+    m_entity.move(mx, my);
 }
 
 void physics::check_and_collide(entity & m_entity, const std::vector<aabb> & collidables){

@@ -27,4 +27,5 @@ public :
 protected :
     vec2 position;
     vec2 size;
+    aabb collide_box;
 };
