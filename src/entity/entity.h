@@ -2,7 +2,7 @@
 
 class entity {
 public :
-    entity(float width, float length, float x = 0.0f, float y = 0.0f);
+    entity(float x, float y, float width, float length);
 
     virtual ~entity();
 

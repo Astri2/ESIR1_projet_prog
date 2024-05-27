@@ -1,6 +1,6 @@
 #include "entity.h"
 
-entity::entity(float width, float height, float x, float y)
+entity::entity(float x, float y, float width, float height,)
         : position({x, y}), size({width, height}) {}
 
 entity::~entity(){}
