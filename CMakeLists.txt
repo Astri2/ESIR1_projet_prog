@@ -7,19 +7,22 @@ add_compile_options(-c -Wall -ggdb)
 
 include_directories(${PROJECT_SOURCE_DIR}/libs/SDL2/include/)
 
+set(exec
+    src/main.cpp
+    src/event.h
+    src/event.cpp
+)
+
 IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
-    set(exec WIN32)
+    list(append exec WIN32)
 
     IF("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "ARM64")
         set(libs ${PROJECT_SOURCE_DIR}/libs/SDL2/lib/msvc_arm64/SDL2.lib)
     ELSE()
         set(libs ${PROJECT_SOURCE_DIR}/libs/SDL2/lib/msvc_x64/SDL2.lib)
     ENDIF()
-
 ELSE()
-    set(exec)
     set(libs ${PROJECT_SOURCE_DIR}/libs/SDL2/bin/mingw_x64/SDL2.dll)
-
 ENDIF()
 
 add_executable(projet_programmation ${exec}
@@ -28,4 +31,5 @@ add_executable(projet_programmation ${exec}
         src/physics/physics.cpp
         src/physics/aabb.h
 )
+
 target_link_libraries(${PROJECT_NAME} ${libs})
