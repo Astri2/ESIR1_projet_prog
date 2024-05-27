@@ -1,4 +1,4 @@
-//
+ //
 // Created by malo1 on 5/27/2024.
 //
 #include "game.h"
@@ -32,14 +32,20 @@ void game::handle_event(const SDL_Event &event) {
     }
 }
 
-std::vector<interactible *> game::perceive(player * user){
-    std::vector<interactible *> interactibles_filtered;
+interactible * game::perceive(const player * user){
+    interactible * nearest = nullptr;
+
+    float min_dist = 0;
 
     for (interactible * objet : interactibles){
         if (physics::are_colliding(user->get_interact_zone(), objet->get_interact_zone())){
-            interactibles.push_back(objet);
+            const float actual_dist = user->get_position().distance(objet->get_position());
+            if( nearest == nullptr || actual_dist < min_dist ) {
+                nearest = objet;
+                min_dist = actual_dist;
+            }
         }
     }
 
-    return interactibles;
+    return nearest;
 }

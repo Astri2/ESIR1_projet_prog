@@ -6,6 +6,7 @@
 
 #include "entity.h"
 #include "physics/circle.h"
+#include "player.h"
 
 class interactible : public entity {
 protected:
@@ -17,5 +18,5 @@ public :
 
     const circle & get_interact_zone() const;
 
-    virtual void interact() = 0;
+    virtual void interact(player * user) = 0;
 };
