@@ -10,7 +10,7 @@
  game::game(unsigned int _width, unsigned int _height)
     : context(_width, _height), m(0, 0), p(new player({{0.f, 100.f}}, {{48.f, 48.f}}, 100))
 {
-    ui_components.push_back(new health_bar(p, 220, 20, 41, 7));
+    ui_components.push_back(new health_bar(p, config::window::width - 220, 20, 200, 20));
 }
 
 game::~game() {
@@ -24,17 +24,17 @@ void game::run() {
         event::manager::update();
 
         p->update(0.1);
-//        for (auto component : ui_components) {
-//            component->update(0.1);
-//        }
+       for (auto component : ui_components) {
+           component->update(0.1);
+       }
 
         renderer::clear(0, 0, 0);
 
         p->draw();
 
-//        for (auto component : ui_components) {
-//            component->draw();
-//        }
+       for (auto component : ui_components) {
+           component->draw();
+       }
 
         renderer::present();
     }
