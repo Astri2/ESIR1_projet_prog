@@ -4,11 +4,9 @@
 #include <algorithm>
 #include "player.h"
 
-#include <iostream>
-#include <ostream>
-
 #include "cluster.h"
 #include "renderer.h"
+
 #include "input.h"
 #include "map/map.h"
 #include "physics/physics.h"
@@ -39,28 +37,32 @@ void player::update(float dt)
 
     vec2<float> dir{{0, 0}};
 
-    if (input::is_key_pressed(SDL_SCANCODE_A)) { dir.x -= 1; }
-    if (input::is_key_pressed(SDL_SCANCODE_D)) { dir.x += 1; }
-    if (input::is_key_pressed(SDL_SCANCODE_W)) { dir.y -= 1; }
-    if (input::is_key_pressed(SDL_SCANCODE_S)) { dir.y += 1; }
-
+    if(input::is_key_pressed(SDL_SCANCODE_A)) { dir.x -= 1; }
+    if(input::is_key_pressed(SDL_SCANCODE_D)) { dir.x += 1; }
+    if(input::is_key_pressed(SDL_SCANCODE_W)) { dir.y -= 1; }
+    if(input::is_key_pressed(SDL_SCANCODE_S)) { dir.y += 1; }
     const float speed = 50;
+
+    if (dir.x == 0 && dir.y == 0) return;
+
+    uint32_t idx = map::find_cluster_idx(get_position());
+    std::vector<cluster*> m_clusters = map::get_surrounding_clusters(idx);
 
     vec2<float> dposx = {{dir.x * speed * dt, 0}};
     vec2<float> dposy = {{0, dir.y * speed * dt}};
 
-    uint32_t idefix = map::find_cluster_idx(get_position());
-    std::vector<cluster*> m_clusters = map::get_surrounding_clusters(idefix);
-
     bool colx = physics::check_collide(this,dposx,m_clusters);
     bool coly = physics::check_collide(this,dposy,m_clusters);
 
-    if (!colx) {
-        move(dposx.x,0);
-    }
+    if (!colx) move(dposx.x,0);
+    if (!coly) move(0,dposy.y);
 
-    if (!coly) {
-        move(0,dposy.y);
+    unsigned int new_idx = map::find_cluster_idx(get_position());
+    if(idx != new_idx) {
+        map::clusters[idx].collidables.erase(this);
+        map::clusters[idx].foreground.erase(this);
+        map::clusters[new_idx].collidables.insert(this);
+        map::clusters[new_idx].foreground.insert(this);
     }
 }
 

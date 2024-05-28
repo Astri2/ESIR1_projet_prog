@@ -20,4 +20,7 @@ namespace map {
     uint32_t find_cluster_idx(const vec2<float>& position);
     std::vector<cluster*> get_surrounding_clusters(uint32_t cluster_idx);
 
+
+    extern std::vector<cluster> clusters;
+    uint32_t find_cluster_idx(const vec2<float>& position);
 } // namespace map

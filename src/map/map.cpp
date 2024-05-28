@@ -16,7 +16,7 @@
 camera map::cam;
 player *map::p;
 
-static std::vector<cluster> clusters;
+std::vector<cluster> map::clusters;
 static unsigned int nb_clusters_x, nb_clusters_y;
 
 static std::vector<cluster const*> get_cluster_to_blit(const camera & camera);
@@ -156,7 +156,7 @@ std::vector<cluster*> map::get_surrounding_clusters(uint32_t cluster_idx) {
             uint32_t idx = cluster_idx + i * nb_clusters_x + j;
             // assuming negatives values aren't to negatives, could use boolean logic in for boundaries instead
             if(idx < nb_clusters_x * nb_clusters_y)
-                res.push_back(&clusters[idx]);
+                res.push_back(&map::clusters[idx]);
         }
     }
     return res;
@@ -174,7 +174,7 @@ std::vector<cluster const*> get_cluster_to_blit(const camera & camera) {
     for(uint32_t i = 0 ; i < dy ; i++) {
         for(uint32_t j = 0 ; j < dx ; j++) {
             uint32_t idx = top_left_cluster_idx + i * nb_clusters_x + j;
-            res.emplace_back(&clusters[idx]);
+            res.emplace_back(&map::clusters[idx]);
         }
     }
     return res;
