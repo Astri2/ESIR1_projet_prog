@@ -15,6 +15,7 @@ void health_bar::draw(const camera& cam) const {
     // red rectangle : area of the bar (not const)
     float health_width = (current_health / max_health) * size.width;
     renderer::draw_rect(position.x, position.y, health_width, size.height, renderer::colors::green);
+    renderer::draw_texture(position, size,sprite_resolution, texture, sprite_offset);
 }
 
 void health_bar::update(float dt) {
