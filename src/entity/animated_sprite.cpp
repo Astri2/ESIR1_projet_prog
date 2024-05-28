@@ -15,8 +15,8 @@ animated_sprite::animated_sprite(vec2<float> _position, vec2<float> _size, vec2<
 
 void animated_sprite::update(float dt) {
     time += dt;
-    if(time > frame_time) {
-        time = 0;
+    if(time >= frame_time) {
+        time -= frame_time;
         sprite_offset.x = (sprite_offset.x+1) % animation_lengths[sprite_offset.y];
     }
 }

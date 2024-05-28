@@ -3,8 +3,6 @@
 //
 #pragma once
 
-#include "physics/aabb.h"
-
 class collidable {
 public :
     virtual aabb get_collide_box() const = 0;

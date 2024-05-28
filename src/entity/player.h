@@ -8,7 +8,6 @@
 #include <cstdint>
 
 #include "physics/collidable.h"
-#include "sprite.h"
 #include "animated_sprite.h"
 #include "collidable_entity.h"
 
@@ -24,5 +23,4 @@ public :
     int get_max_health() const;
     int get_current_health() const;
     const circle get_interact_zone() const;
-
 };
