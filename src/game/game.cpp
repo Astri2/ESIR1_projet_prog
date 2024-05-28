@@ -77,6 +77,7 @@ void game::handle_event(const SDL_Event &event) {
     }
 }
 
+/*
 interactible * game::perceive(const player * user){
     interactible * nearest = nullptr;
     float nearest_dist = 0;
@@ -94,4 +95,4 @@ interactible * game::perceive(const player * user){
 
     return nearest;
 }
-
+*/
