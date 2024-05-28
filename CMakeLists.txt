@@ -70,6 +70,7 @@ set(exec
         src/physics/collidable.h
         src/input.cpp
         src/input.h
+        src/utils/vec4.h
 )
 
 # SDL2_image sources

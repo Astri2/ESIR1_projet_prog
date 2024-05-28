@@ -7,12 +7,24 @@
 
 namespace config {
 
+    namespace viewport {
+
+        constexpr uint16_t width = 240;
+        constexpr uint16_t height = 135;
+
+    } // namespace viewport
+
     namespace window {
 
-        constexpr uint16_t width = 440;
-        constexpr uint16_t height = 608;
+        constexpr uint16_t width = 480;
+        constexpr uint16_t height = 270;
 
     } // namespace window
+
+    constexpr struct {
+        float x = static_cast<float>(config::window::width) / static_cast<float>(config::viewport::width);
+        float y = static_cast<float>(config::window::height) / static_cast<float>(config::viewport::height);
+    } ratio;
 
     namespace map {
 

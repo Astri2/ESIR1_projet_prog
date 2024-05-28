@@ -29,7 +29,7 @@ void player::update(float dt){
     if(input::is_key_pressed(SDL_SCANCODE_W)) { dir.y -= 1; }
     if(input::is_key_pressed(SDL_SCANCODE_S)) { dir.y += 1; }
 
-    const float speed = 10;
+    const float speed = 50;
     move(dir.x * speed * dt, dir.y * speed * dt);
 }
 
