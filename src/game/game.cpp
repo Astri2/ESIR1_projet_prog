@@ -8,9 +8,13 @@
 #include "renderer.h"
 #include "event.h"
 
+std::vector<gui_component *> game::ui_components;
+
+
 game::game(unsigned int _width, unsigned int _height)
     : context(_width, _height), previous_tick(SDL_GetTicks())
 {
+
     map::load_wsv("../resources/out.txt");
     // ui_components.push_back(new health_bar(m.player, 220, 20, 41, 7));
 }
@@ -35,9 +39,10 @@ void game::run() {
         renderer::clear(0, 0, 0);
         map::draw();
         for (auto component : ui_components) {
-            component->draw();
+            component->draw(map::cam);
         }
         // menus
+
         renderer::present();
 
         previous_tick = start_tick;

@@ -12,6 +12,7 @@
 #include "cluster.h"
 #include "entity/entity.h"
 #include "entity/cow.h"
+#include "game/game.h"
 
 camera map::cam;
 player* map::p;
@@ -119,6 +120,9 @@ void map::load_wsv(const char* file)
             {
                 // init player
                 p = new player({{line.x, line.y}}, {{48.0f, 48.0f}}, 100);
+                game::ui_components.push_back(new health_bar( {config::window::width - 220, 20}, {200, 20}, {0,0}, {41,7},"../resources/healthbar.png",p));
+
+
                 clusters[idx].foreground.insert(p);
                 float offset_x = line.x - static_cast<float>(config::viewport::width) / 2.0f, offset_y = line.y - static_cast<float>(config::viewport::height) / 2.0f;
                 cam = camera({{ offset_x, offset_y }}, {{ static_cast<float>(config::viewport::width), static_cast<float>(config::viewport::height) }}, .8f, 2.f, p);
