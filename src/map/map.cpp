@@ -120,7 +120,7 @@ void map::load_wsv(const char* file)
             {
                 // init player
                 p = new player({{line.x, line.y}}, {{48.0f, 48.0f}}, 100);
-                game::ui_components.push_back(new health_bar( {config::window::width - 220, 20}, {200, 20}, {0,0}, {41,7},"../resources/healthbar.png",p));
+                game::ui_components.push_back(new health_bar( {config::window::width - 220, 20}, {123,21}, {0,0}, {41,7},"../resources/healthbar.png",p));
 
 
                 clusters[idx].foreground.insert(p);
