@@ -2,6 +2,8 @@
 // Created by celia on 27/05/2024.
 //
 #include <algorithm>
+#include <iostream>
+
 #include "player.h"
 
 #include "cluster.h"
@@ -69,13 +71,15 @@ void player::update(float dt)
     if (!colx) move(dposx.x, 0);
     if (!coly) move(0, dposy.y);
 
-    unsigned int new_idx = map::find_cluster_idx(get_position());
-    if (idx != new_idx)
-    {
-        map::clusters[idx].collidables.erase(this);
+
+    if(!(colx && coly)) {
+        unsigned int new_idx = map::find_cluster_idx(get_position());
         map::clusters[idx].foreground.erase(this);
-        map::clusters[new_idx].collidables.insert(this);
         map::clusters[new_idx].foreground.insert(this);
+        if(idx != new_idx) {
+            map::clusters[idx].collidables.erase(this);
+            map::clusters[new_idx].collidables.insert(this);
+        }
     }
 }
 

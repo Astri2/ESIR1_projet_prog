@@ -120,18 +120,10 @@ void map::load_wsv(const char* file)
                 // init player
                 p = new player({{line.x, line.y}}, {{48.0f, 48.0f}}, 100);
                 clusters[idx].foreground.insert(p);
-                float offset_x = line.x - static_cast<float>(config::viewport::width) / 2.0f, offset_y = line.y -
-                          static_cast<float>(config::viewport::height) / 2.0f;
-                cam = camera({{offset_x, offset_y}}, {
-                                 {
-                                     static_cast<float>(config::viewport::width),
-                                     static_cast<float>(config::viewport::height)
-                                 }
-                             }, .8f, 1.5f, p);
-            }
-            break;
-        default:
-            {
+                float offset_x = line.x - static_cast<float>(config::viewport::width) / 2.0f, offset_y = line.y - static_cast<float>(config::viewport::height) / 2.0f;
+                cam = camera({{ offset_x, offset_y }}, {{ static_cast<float>(config::viewport::width), static_cast<float>(config::viewport::height) }}, .8f, 2.f, p);
+            } break;
+            default: {
                 std::cerr << "unknown entity type in map !" << std::endl;
             }
             break;
@@ -176,9 +168,8 @@ void map::update(float dt)
             e->update(dt);
         }
 
-        int a = c->foreground.size();
-        for (entity* e : c->foreground)
-        {
+        auto foreground_copy(c->foreground);
+        for(entity* e : foreground_copy) {
             e->update(dt);
         }
     }

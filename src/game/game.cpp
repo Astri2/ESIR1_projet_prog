@@ -1,6 +1,7 @@
 //
 // Created by malo1 on 5/27/2024.
 //
+#include <iostream>
 #include "game.h"
 
 #include "physics/physics.h"
@@ -29,7 +30,6 @@ void game::run() {
         for (auto component : ui_components) {
             component->update(dt);
         }
-        previous_tick = start_tick;
 
         /* Render Pass */
         renderer::clear(0, 0, 0);
@@ -39,6 +39,10 @@ void game::run() {
         }
         // menus
         renderer::present();
+
+        previous_tick = start_tick;
+        if(config::tick_time > dt) SDL_Delay((uint32_t)(config::tick_time - dt)*1000);
+        else std::cout << "can't keep it up (" << dt-config::tick_time << " seconds behind)\n";
     }
 }
 
