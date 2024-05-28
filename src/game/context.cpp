@@ -7,9 +7,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+#include "input.h"
 #include "context.h"
 #include "renderer.h"
-#include "input.h"
 
 context::context(unsigned int _width, unsigned int _height)
     : width(_width), height(_height), window(nullptr)
@@ -30,11 +30,6 @@ context::context(unsigned int _width, unsigned int _height)
         SDL_DestroyWindow(this->window);
         SDL_Quit();
         exit(1);
-    }
-
-    auto flags = IMG_Init(IMG_INIT_PNG);
-    if(flags != IMG_INIT_PNG) {
-        std::cerr << "Error on IMG_Init, could not init PNG : " << IMG_GetError() << std::endl;
     }
 
     input::initialize();

@@ -10,84 +10,54 @@
 #include "map.h"
 #include "entity/entity.h"
 
+#include "serializer.h"
+
 map::map(unsigned int _width, unsigned int _height) {
-    load_wsv({{0, 0}}, "../resources/out.txt");
-}
-
-struct csv_line {
-    enum class entity_type {
-        tile,
-    } type;
-    float x, y;
-};
-
-csv_line read_csv_line(const char* line) {
-    char* after;
-
-    assert('0' == line[0] && "J'ai super envie de mourrir <-- oui j'ai mis deux r et je vois pas le problEME !!!!!!");
-
-    // le premier charactère est 0 suivis d'un espace simple
-    line += 2;
-
-    double x = std::strtod(line, &after);
-    if(line == after) {
-        std::cerr << "could not read x position, currently at : " << line << std::endl;
-    }
-    line = after;
-
-    double y = std::strtod(line, &after);
-    if(after == line) {
-        std::cerr << "could not read y position, currently at : " << line << std::endl;
-    }
-
-    return csv_line {
-            csv_line::entity_type::tile,
-            static_cast<float>(x), static_cast<float>(y)
-    };
-}
-
-void map::load_wsv(vec2<float> size, const char * file){
-    std::ifstream input_file(file);
+    serializer::map data = serializer::deserialize("../resources/test.map");
 
     constexpr uint16_t cw = config::map::cluster_width;
     constexpr uint16_t ch = config::map::cluster_height;
 
-    char buffer[2048] = { 0 };
-    input_file.getline(buffer, 2048);
-
-    char *start = buffer, *after = start;
-
-    // read width
-    unsigned long width = strtoul(start, &after, 10);
-    if(after == start) {
-        std::cerr << "could not read width, currently at : " << start << std::endl;
-    }
-    start = after;
-
-    // read height
-    unsigned long height = strtoul(start, &after, 10);
-    if(after == start) {
-        std::cerr << "could not read height, currently at : " << start << std::endl;
-    }
-
-    this->nb_clusters_x = std::ceil((float)width/cw);
-    this->nb_clusters_y = std::ceil((float)height/ch);
+    this->nb_clusters_x = std::ceil((float)data.header.width/cw);
+    this->nb_clusters_y = std::ceil((float)data.header.height/ch);
     for(unsigned int x = 0; x < this->nb_clusters_x ; x++) {
         for(unsigned int y = 0 ; y < this->nb_clusters_y ; y++) {
-            this->clusters.push_back(cluster({static_cast<float>(y*ch),static_cast<float>((x+1)*cw),static_cast<float>((y+1)*ch),static_cast<float>(x*cw)}));
+            this->clusters.push_back(
+                    cluster({
+                        static_cast<float>(y*ch),
+                        static_cast<float>((x+1)*cw),
+                        static_cast<float>((y+1)*ch),
+                        static_cast<float>(x*cw)
+                    })
+            );
         }
     }
 
-    for (; input_file.getline(buffer, 2048); ) {
-        csv_line line = read_csv_line(buffer);
-        switch (line.type) {
-            case csv_line::entity_type::tile: {
-                unsigned int idx = this->find_cluster_idx({{line.x, line.y}});
-                this->clusters[idx].background.push_back(new sprite({{line.x, line.y}},
-                                                                    {{config::map::tile_width, config::map::tile_height}}, {{0, 0}}, {{16, 16}}, "../resources/tiles/water.png"));
+    for(serializer::map_row& row : data.data) {
+        uint32_t idx = this->find_cluster_idx(row.position);
+        switch (row.type) {
+            case serializer::map_row::entity_type::tile: {
+                this->clusters[idx].background.push_back(
+                    new sprite(
+                        row.position,
+                        {{ config::map::tile_width, config::map::tile_height }},
+                        {{ row.tile.i, row.tile.j }},
+                        {{ 16, 16 }},
+                        texture_manager::atlases_name[(size_t)row.tile.atlas_id].c_str()
+                    )
+                );
             } break;
-            default: {
-                std::cerr << "unknown entity type in map !" << std::endl;
+
+            case serializer::map_row::entity_type::animated_tile: {
+                // this->clusters[idx].background.push_back();
+                std::cerr << "Not implemented yet !" << std::endl;
+            } break;
+
+            case serializer::map_row::entity_type::player: {
+                player* p = new player(row.position, {{ 48, 48 }}, 100);
+                this->clusters[idx].foreground.insert(p);
+                this->clusters[idx].collidables.insert(p);
+                // create the camera so we can see something
             } break;
         }
     }

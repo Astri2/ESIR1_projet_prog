@@ -24,4 +24,10 @@ namespace config {
 
     } // namespace map
 
+    namespace serializer {
+
+        constexpr char prelude[] = "MAPV1";
+
+    } // namespace serializer
+
 } // namespace config

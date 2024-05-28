@@ -70,6 +70,9 @@ set(exec
         src/physics/collidable.h
         src/input.cpp
         src/input.h
+        src/map/serializer.h
+        src/map/serializer.cpp
+        src/texture_manager.cpp
 )
 
 # SDL2_image sources
