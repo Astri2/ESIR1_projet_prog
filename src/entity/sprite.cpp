@@ -6,7 +6,7 @@
 #include "renderer.h"
 
 sprite::sprite(vec2<float> _position, vec2<float> _size, vec2<int> _sprite_offset, vec2<int> _sprite_resolution, const char* image_src):
-        entity(_position.x, _position.y),  size(_size), sprite_offset(_sprite_offset), sprite_resolution(_sprite_resolution)
+        entity(_position),  size(_size), sprite_offset(_sprite_offset), sprite_resolution(_sprite_resolution)
 {
     renderer::load_texture(image_src, this);
 }

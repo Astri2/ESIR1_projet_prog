@@ -8,11 +8,10 @@
 
 class entity {
 public:
-    entity(float x, float y);
+    entity(vec2<float> _position);
 
     virtual ~entity();
 
-    virtual void draw() const = 0;
     virtual void update(float dt) {}
 
     void move(float dx, float dy);

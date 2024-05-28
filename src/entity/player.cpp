@@ -5,14 +5,13 @@
 #include "player.h"
 #include "renderer.h"
 
-player::player(float x, float y, float width, float height, int max_health)
-        : animated_sprite({{x,y}}, {{width, height}}, {{48, 48}}, "../resources/test.bmp", {4}, 0.1),
-        collidable(0,0,0,0), max_health(max_health), current_health(max_health)
+player::player(vec2<float> pos, vec2<float> size, int max_health):
+        entity(pos),
+        animated_sprite(pos, size, {{48, 48}}, "../resources/test.bmp", {4}, 0.1),
+        collidable_entity(pos, aabb{0.f, 0.f, size.width, size.height}),
+        max_health(max_health), current_health(max_health)
 {}
 
-const aabb player::get_collide_box() const {
-    return collide_box + get_position();
-}
 
 const circle player::get_interact_zone() const{
     circle interact_zone{15,size/2.0f};

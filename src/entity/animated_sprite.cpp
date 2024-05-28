@@ -6,6 +6,7 @@
 
 animated_sprite::animated_sprite(vec2<float> _position, vec2<float> _size, vec2<int> _frame_resolution,
                                  const char *image_src, const std::vector<int>& _animation_lengths, float _frame_time, int animation_id):
+    entity(_position),
     sprite(_position, _size, {{0, animation_id}}, _frame_resolution, image_src),
     time(0), frame_time(_frame_time), animation_lengths(_animation_lengths)
 {

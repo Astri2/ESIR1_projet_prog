@@ -3,8 +3,8 @@
 //
 #include "entity.h"
 
-entity::entity(float x, float y)
-        : position({x, y})
+entity::entity(vec2<float> _position)
+        : position(_position)
 {}
 
 entity::~entity() = default;

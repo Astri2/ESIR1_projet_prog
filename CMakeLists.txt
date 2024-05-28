@@ -58,8 +58,7 @@ set(exec
 
         src/GUI/gui_component.cpp
         src/GUI/gui_component.h
-        src/physics/collidable.cpp
-        src/physics/collidable.h
+        src/entity/collidable.h
         src/entity/movable.cpp
         src/entity/movable.h
         src/entity/sprite.cpp
@@ -67,6 +66,8 @@ set(exec
         src/texture_manager.h
         src/entity/animated_sprite.cpp
         src/entity/animated_sprite.h
+        src/entity/collidable_entity.cpp
+        src/entity/collidable_entity.h
 )
 
 # SDL2_image sources

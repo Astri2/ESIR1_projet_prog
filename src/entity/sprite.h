@@ -8,7 +8,7 @@
 #include "entity/entity.h"
 #include "SDL_render.h"
 
-class sprite: public entity {
+class sprite: public virtual entity {
 protected:
     vec2<float> size;
     vec2<int> sprite_offset;
@@ -19,7 +19,7 @@ public:
 
     vec2<float> get_size() const;
 
-    void draw() const override;
+    void draw() const;
 
     void set_texture(SDL_Texture* texture);
 

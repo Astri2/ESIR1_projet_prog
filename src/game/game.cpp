@@ -13,7 +13,7 @@
 #include "entity/animated_sprite.h"
 
  game::game(unsigned int _width, unsigned int _height)
-    : context(_width, _height), p(new player(0, 100, 48, 48, 100))
+    : context(_width, _height), p(new player({{0.f, 100.f}}, {{48.f, 48.f}}, 100))
 
 {
     ui_components.push_back(new health_bar(p, 220, 20, 41, 7));
