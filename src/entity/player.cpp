@@ -16,9 +16,15 @@
 player::player(vec2<float> pos, vec2<float> size, int max_health):
     entity(pos),
     animated_sprite(pos, size, {{48, 48}}, "../resources/player.png", {4}, 0.1),
-    collidable_entity(pos, aabb{0.f, size.width, size.height, 0.f}),
+    collidable_entity(pos, aabb{24, 28, 32, 20}),
     max_health(max_health), current_health(max_health)
 {
+}
+
+void player::draw(const camera & cam) const
+{
+    collidable_entity::draw_collide_box(cam);
+    sprite::draw(cam);
 }
 
 circle player::get_interact_zone() const
@@ -30,8 +36,6 @@ circle player::get_interact_zone() const
 void player::update(float dt)
 {
     animated_sprite::update(dt);
-
-
 
     vec2<float> dir{{0, 0}};
 

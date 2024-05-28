@@ -23,4 +23,6 @@ public :
     int get_max_health() const;
     int get_current_health() const;
     circle get_interact_zone() const;
+
+    void draw(const camera & cam) const override;
 };
