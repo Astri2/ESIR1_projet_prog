@@ -21,8 +21,8 @@ public:
     virtual void handle_event(SDL_Event const& event) override;
 
     void run();
+
 private:
-    
     std::vector<entity *> entities;
     std::vector<interactible *> interactibles;
     std::vector<gui_component *> ui_components;

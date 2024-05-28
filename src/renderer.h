@@ -16,5 +16,6 @@ namespace renderer {
     void present();
 
     void draw_rect(float x, float y, float width, float height, color c = colors::black);
+    void draw_texture(float x, float y, float width, float height, const char* filepath);
 
 } // namespace renderer

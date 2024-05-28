@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 namespace renderer {
 
@@ -44,6 +45,21 @@ namespace renderer {
         SDL_FRect rect { x, y, width, height };
         SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
         SDL_RenderFillRectF(renderer, &rect);
+    }
+
+    void draw_texture(float x, float y, float width, float height, const char* filepath) {
+        SDL_Surface* img = IMG_Load(filepath);
+        if(!img) {
+            std::cerr << "Could not load image " << filepath << " : " << IMG_GetError() << std::endl;
+        }
+
+        SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, img);
+        if(!texture) {
+            std::cerr << "Could not create texture : " << IMG_GetError() << std::endl;
+        }
+
+        SDL_FRect rect { x, y, width, height };
+        SDL_RenderCopyF(renderer, texture, nullptr, &rect);
     }
 
 } // namespace renderer
