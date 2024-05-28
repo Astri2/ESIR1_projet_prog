@@ -14,15 +14,18 @@ player::player(float x, float y, float width, float height, int max_health, floa
     interact_zone.position = entity::position;
 }
 
-const circle & player::get_interact_zone() const{
-    return interact_zone;
-}
 
 player::~player(){}
 
 void player::draw(){
     renderer::draw_rect(position.x, position.y, size.width, size.height, renderer::colors::red);
 }
+
+const circle player::get_interact_zone() const{
+    circle interact_zone{15,size/2.0f};
+    return interact_zone + get_position();
+}
+
 
 void player::update(float dt){
 

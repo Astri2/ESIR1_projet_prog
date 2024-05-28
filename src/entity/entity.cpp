@@ -3,10 +3,11 @@
 //
 #include "entity.h"
 
-entity::entity(float x, float y, float width, float height)
-        : position({x, y}), size({width, height}) {}
+entity::entity(vec2<float> _position)
+        : position(_position)
+{}
 
-entity::~entity(){}
+entity::~entity() = default;
 
 void entity::move(float dx, float dy) {
     position.x += dx;
@@ -20,13 +21,5 @@ void entity::move_to(float x, float y) {
 
 vec2<float> entity::get_position() const {
     return this->position;
-}
-
-vec2<float> entity::get_size() const {
-    return this->size;
-}
-
-const aabb & entity::get_collide_box() const {
-    return collide_box;
 }
 
