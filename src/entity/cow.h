@@ -17,6 +17,8 @@ class cow : public animated_sprite, public collidable_entity, public interactibl
 protected:
     const uint32_t max_health;
     uint32_t current_health;
+    float delai_interact = 1.0f;
+    float max_delai_interact = 1.0f;
 
 public :
     cow(vec2<float> pos, vec2<float> size, int max_health);
@@ -31,6 +33,10 @@ public :
 
     void interact(player* user) override
     {
-        std::cout << "meuh" << std::endl;
+        if ( delai_interact >= max_delai_interact) {
+            sprite_offset.y = 1;
+            delai_interact = 0;
+        }
+
     }
 };
