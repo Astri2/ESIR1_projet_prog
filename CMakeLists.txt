@@ -39,11 +39,18 @@ set(exec
 
         src/camera.cpp
         src/camera.h
+
         src/utils/vec2.h
 
         src/renderer.h
         src/renderer.cpp
         src/color.h
+        
+        src/cluster.cpp
+        src/cluster.h
+        
+        src/sprites/sprite.cpp
+        src/sprites/sprite.h
 
         src/GUI/health_bar.cpp
         src/GUI/health_bar.h
