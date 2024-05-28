@@ -21,7 +21,7 @@ game::game(unsigned int _width, unsigned int _height)
         }
     }
     //might be worth storing it inside entity
-    unsigned int player_cluster_idx = find_cluster_idx(p);
+    unsigned int player_cluster_idx = find_cluster_idx(p->get_position());
     clusters[player_cluster_idx]->get_entities().insert(p);
 }
 
@@ -53,7 +53,7 @@ interactible * game::perceive(const player * user){
     interactible * nearest = nullptr;
     float nearest_dist = 0;
 
-    for(cluster* c : get_surrounding_clusters(find_cluster_idx(user))) {
+    for(cluster* c : get_surrounding_clusters(find_cluster_idx(user->get_position()))) {
         for (interactible * objet : c->get_interactibles()){
             const float shared_dist = physics::shared_distance(user->get_interact_zone() , objet->get_interact_zone());
 
@@ -90,8 +90,8 @@ std::vector<cluster *> game::get_cluster_to_blit(camera *camera) {
     // computes the rectangle of clusters that should be blit, given the top_left and bottom_right clusters
     unsigned int top_left_cluster_idx = find_cluster_idx({camera->get_outer_range().top_left()});
     unsigned int bottom_right_cluster_idx = find_cluster_idx({camera->get_outer_range().bottom_right()});
-    for(int i = 0 ; i < (bottom_right_cluster_idx-top_left_cluster_idx)/this->nb_clusters_x ; i++) {
-        for(int j = 0 ; j < (bottom_right_cluster_idx-top_left_cluster_idx)%this->nb_clusters_x ; j++) {
+    for(unsigned int i = 0 ; i < (bottom_right_cluster_idx-top_left_cluster_idx)/this->nb_clusters_x ; i++) {
+        for(unsigned int j = 0 ; j < (bottom_right_cluster_idx-top_left_cluster_idx)%this->nb_clusters_x ; j++) {
             unsigned int idx = top_left_cluster_idx + i * this->nb_clusters_x + j;
             res.push_back(clusters[idx]);
         }

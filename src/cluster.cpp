@@ -8,15 +8,15 @@ cluster::cluster(const aabb &_collide_box): collision_box(_collide_box) {
 
 }
 
-std::set<entity *> &cluster::get_entities() {
+std::set<entity *, compare> &cluster::get_entities() {
     return this->entities;
 }
 
-std::set<interactible *> &cluster::get_interactibles() {
+std::set<interactible *, compare> &cluster::get_interactibles() {
     return this->interactibles;
 }
 
-const std::set<interactible *> &cluster::get_interactibles() const{
+const std::set<interactible *, compare> &cluster::get_interactibles() const{
     return this->interactibles;
 }
 
