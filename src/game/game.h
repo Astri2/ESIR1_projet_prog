@@ -29,9 +29,9 @@ public:
     void handle_event(SDL_Event const& event) override;
 
     void run();
+    static std::vector<gui_component *> ui_components;
 
 private:
-    std::vector<gui_component *> ui_components;
     uint32_t previous_tick;
 
     bool running = true;
