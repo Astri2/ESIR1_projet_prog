@@ -13,6 +13,7 @@
 #include "entity/player.h"
 #include "cluster.h"
 #include "camera.h"
+#include "GUI/health_bar.h"
 
 class game: public context, public event::listener {
 public:
@@ -33,6 +34,7 @@ public:
 private:
     std::vector<cluster*> clusters;
     unsigned int nb_clusters_x, nb_clusters_y;
+    std::vector<gui_component *> ui_components;
 
     interactible * perceive(const player * user);
 
