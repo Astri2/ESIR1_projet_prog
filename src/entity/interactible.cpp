@@ -4,9 +4,11 @@
 
 #include "interactible.h"
 
-interactible::interactible(float x, float y, float width, float height, float interact_r): entity(x,y,width,height) {
+interactible::interactible(float x, float y, float interact_r) {
     interact_zone.rayon = interact_r;
-    interact_zone.position = entity::position;
+    interact_zone.position = vec2<float>();
+    interact_zone.position.x = x;
+    interact_zone.position.y = y;
 }
 
 const circle & interactible::get_interact_zone() const{

@@ -7,7 +7,9 @@
 #include "physics/circle.h"
 #include <cstdint>
 
-class player : public entity {
+#include "physics/collidable.h"
+
+class player : public entity, public collidable {
 protected:
     circle interact_zone;
     const uint32_t max_health;
@@ -22,4 +24,6 @@ public :
     int get_max_health() const;
     int get_current_health() const;
     const circle & get_interact_zone() const;
+
+    const aabb &get_collide_box() const;
 };
