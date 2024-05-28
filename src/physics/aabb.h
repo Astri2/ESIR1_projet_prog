@@ -15,7 +15,7 @@ struct aabb {
     vec2 center() const {return {{(left+right)/2.f, (top+bottom)/2.f}};}
 };
 
-inline aabb operator+ (const aabb& old, const vec2 & dpos){
+inline aabb operator+ (const aabb& old, const vec2<float> & dpos){
     aabb nouveau{};
     nouveau.top = old.top + dpos.y;
     nouveau.bottom = old.bottom + dpos.y;
