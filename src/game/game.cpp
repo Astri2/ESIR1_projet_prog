@@ -11,7 +11,8 @@
 #include "sprites/sprite.h"
 
 game::game(unsigned int _width, unsigned int _height)
-    : context(_width, _height), p(new player(0, 0, 5, 5, 100, 5)) {
+    : context(_width, _height), p(new player(0, 0, 5, 5, 100, 5))
+{
     ui_components.push_back(new health_bar(p, 220, 20, 200, 15));
 }
 
