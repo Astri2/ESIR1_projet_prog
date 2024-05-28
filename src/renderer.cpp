@@ -59,20 +59,19 @@ namespace renderer {
         using std::cerr;
         using std::endl;
 
-
         const char * ext = image_src;
 
         for ( ; *ext != '\0' ; ext ++ );
         for ( ; *ext != '.' ; ext -- );
-        ext ++;
+        ext++;
 
         SDL_Surface* img = nullptr;
-        
-        if ( strcmp(ext,"png") ) {
+
+        if ( strcmp(ext,"png") == 0 ) {
             img = IMG_Load(image_src);
         }
-        else if ( strcmp(ext,"bmp") ) {
-            SDL_Surface* img = SDL_LoadBMP(image_src);
+        else if ( strcmp(ext,"bmp") == 0 ) {
+            img = SDL_LoadBMP(image_src);
         }
 
         if (img == nullptr) {
