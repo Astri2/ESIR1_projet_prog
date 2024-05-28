@@ -10,7 +10,7 @@
 
 cow::cow(vec2<float> pos, vec2<float> size, int max_health):
     entity(pos),
-    animated_sprite(pos, size, {{32, 32}}, "../resources/cow.png", {3}, 0.1),
+    animated_sprite(pos, size, {{32, 32}}, "../resources/cow.png", {3,3,2}, 0.1),
     collidable_entity(pos, aabb{24, 24, 32, 8}),
     interactible(16, 16, 32),
     max_health(max_health), current_health(max_health)
@@ -32,6 +32,13 @@ circle cow::get_interact_zone() const
 void cow::update(float dt)
 {
     animated_sprite::update(dt);
+
+    if (delai_interact >= max_delai_interact) {
+        sprite_offset.y = 0;
+    }
+    else {
+        delai_interact += dt;
+    }
 
     vec2<float> dir{{0, 0}};
 
