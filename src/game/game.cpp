@@ -40,7 +40,7 @@ void game::run() {
 
         p->update(0.1);
 
-        test.update(0.025);
+        test.update(0.1);
 
         renderer::clear(0, 0, 0);
 
