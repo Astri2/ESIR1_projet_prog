@@ -15,6 +15,7 @@ class map {
 public:
     map(unsigned int _width, unsigned int _height);
 
+    void load_comp(std::vector<std::string> args);
     void load_wsv(vec2<float> size, const char * file);
     unsigned int find_cluster_idx(const vec2<float>& position) const;
 

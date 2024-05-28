@@ -2,6 +2,10 @@
 // Created by tomch on 28/05/2024.
 //
 
+#include <array>
+#include <fstream>
+#include <iostream>
+
 #include "map.h"
 
 map::map(unsigned int _width, unsigned int _height){
@@ -15,9 +19,6 @@ map::map(unsigned int _width, unsigned int _height){
             this->clusters.push_back(cluster({y*ch,(x+1)*cw,(y+1)*ch,x*cw}));
         }
     }
-    //might be worth storing it inside entity
-    unsigned int player_cluster_idx = find_cluster_idx(p->get_position());
-    clusters[player_cluster_idx].entities.insert(p);
 }
 
 
@@ -54,4 +55,55 @@ std::vector<cluster *> map::get_cluster_to_blit(const camera & camera) const {
         }
     }
     return res;
+}
+
+void load_comp(std::vector<std::string> args){
+
+}
+
+struct csv_line {
+    enum class entity_type {
+        tile,
+    } type;
+    float x, y;
+};
+
+csv_line read_csv_line(const char* line) {
+    char* after;
+
+    // le premier charactère est 0 suivis d'un espace simple
+    line += 2;
+
+    double x = std::strtod(line, &after);
+    if(line == after) {
+        // an error has occured
+    }
+    line = after;
+
+    double y = std::strtod(line, &after);
+    if(after == line) {
+        // an error has occured
+    }
+
+    return csv_line {
+        csv_line::entity_type::tile,
+        static_cast<float>(x), static_cast<float>(y)
+    };
+}
+
+void map::load_wsv(vec2<float> size, const char * file){
+    std::ifstream input_file(file);
+
+    for (char buffer[2048] = {0}; input_file.getline(buffer, 2048); ) {
+        csv_line line = read_csv_line(buffer);
+        switch (line.type) {
+            case csv_line::entity_type::tile: {
+                unsigned int idx = this->find_cluster_idx({{line.x, line.y}});
+                // this->clusters[idx].entities.insert(new );
+            } break;
+            default: {
+                std::cerr << "unknown entity type in map !" << std::endl;
+            } break;
+        }
+    }
 }
