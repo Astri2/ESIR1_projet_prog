@@ -3,10 +3,11 @@
 //
 
 #include "camera.h"
+#include "entity/sprite.h"
 #include <cassert>
 #include <algorithm>
 
-camera::camera(float _x, float _y, float _width, float _height, float free_move_ratio, float outer_simulation_ratio, const entity* _reference):
+camera::camera(float _x, float _y, float _width, float _height, float free_move_ratio, float outer_simulation_ratio, const sprite* _reference):
         x(_x), y(_y), width(_width), height(_height),
         inner_x(_width * (1.f - free_move_ratio) / 2.f), inner_y(_height * (1.f - free_move_ratio) / 2.f),
         inner_width(_width * free_move_ratio), inner_height(_height * free_move_ratio),
@@ -25,7 +26,7 @@ void camera::update() {
     this->y += std::max(0.f, (ref_pos.y + reference->get_size().height) - (y + inner_y + inner_height)); //bottom
 }
 
-void camera::change_reference(const entity* _reference) { this->reference = _reference; }
+void camera::change_reference(const sprite* _reference) { this->reference = _reference; }
 
 const aabb &camera::get_outer_range() {
     return this->outer_range;

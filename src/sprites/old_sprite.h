@@ -7,7 +7,7 @@
 #include <vector>
 #include "utils/vec2.h"
 
-class sprite {
+class old_sprite {
 protected:
     SDL_Texture* texture = nullptr;
     vec2<float> size;
@@ -22,9 +22,7 @@ public:
 
     int get_number_of_animation();
 
-    int load_texture(const char * image_src);
 
-    sprite(vec2<float> position, vec2<float> size, vec2<int> frame_resolution, const std::vector<int>& max_frames);
 
     void set_texture(SDL_Texture* texture);
 
@@ -32,7 +30,6 @@ public:
 
     void update(float dt);
 
-    ~sprite();
 
     vec2<int> get_frame() const;
 

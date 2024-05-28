@@ -7,7 +7,8 @@
 
 #include "color.h"
 #include "SDL2/SDL.h"
-#include "sprites/sprite.h"
+#include "sprites/old_sprite.h"
+#include "entity/sprite.h"
 
 namespace renderer {
 
