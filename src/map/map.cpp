@@ -13,10 +13,9 @@
 camera map::cam;
 player *map::p;
 
-static std::vector<cluster> clusters;
+std::vector<cluster> map::clusters;
 static unsigned int nb_clusters_x, nb_clusters_y;
 
-static uint32_t find_cluster_idx(const vec2<float>& position);
 static std::vector<cluster*> get_surrounding_clusters(uint32_t cluster_idx);
 static std::vector<cluster const*> get_cluster_to_blit(const camera & camera);
 
@@ -137,7 +136,7 @@ void map::update(float dt) {
 
 // protected utilities
 
-uint32_t find_cluster_idx(const vec2<float>& position) {
+uint32_t map::find_cluster_idx(const vec2<float>& position) {
     return ((int)position.y/config::map::cluster_height)*nb_clusters_x + ((int)position.x/config::map::cluster_width);
 }
 
@@ -148,7 +147,7 @@ std::vector<cluster*> get_surrounding_clusters(uint32_t cluster_idx) {
             uint32_t idx = cluster_idx + i * nb_clusters_x + j;
             // assuming negatives values aren't to negatives, could use boolean logic in for boundaries instead
             if(idx < nb_clusters_x * nb_clusters_y)
-                res.push_back(&clusters[idx]);
+                res.push_back(&map::clusters[idx]);
         }
     }
     return res;
@@ -157,8 +156,8 @@ std::vector<cluster*> get_surrounding_clusters(uint32_t cluster_idx) {
 std::vector<cluster const*> get_cluster_to_blit(const camera & camera) {
 
     // computes the rectangle of clusters that should be blit, given the top_left and bottom_right clusters
-    const uint32_t top_left_cluster_idx = find_cluster_idx({camera.get_outer_range().top_left()});
-    const uint32_t bottom_right_cluster_idx = find_cluster_idx({camera.get_outer_range().bottom_right()});
+    const uint32_t top_left_cluster_idx = map::find_cluster_idx({camera.get_outer_range().top_left()});
+    const uint32_t bottom_right_cluster_idx = map::find_cluster_idx({camera.get_outer_range().bottom_right()});
     const uint32_t dx = (bottom_right_cluster_idx-top_left_cluster_idx)%nb_clusters_x;
     const uint32_t dy = (bottom_right_cluster_idx-top_left_cluster_idx)/nb_clusters_x;
 
@@ -166,7 +165,7 @@ std::vector<cluster const*> get_cluster_to_blit(const camera & camera) {
     for(uint32_t i = 0 ; i < dy ; i++) {
         for(uint32_t j = 0 ; j < dx ; j++) {
             uint32_t idx = top_left_cluster_idx + i * nb_clusters_x + j;
-            res.emplace_back(&clusters[idx]);
+            res.emplace_back(&map::clusters[idx]);
         }
     }
     return res;

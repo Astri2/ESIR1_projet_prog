@@ -22,4 +22,7 @@ namespace map {
     void draw();
     void update(float dt);
 
+
+    extern std::vector<cluster> clusters;
+    uint32_t find_cluster_idx(const vec2<float>& position);
 } // namespace map

@@ -3,8 +3,9 @@
 //
 #include <algorithm>
 #include "player.h"
-#include "renderer.h"
 #include "input.h"
+
+#include "map/map.h"
 
 player::player(vec2<float> pos, vec2<float> size, int max_health):
         entity(pos),
@@ -19,7 +20,8 @@ circle player::get_interact_zone() const{
     return interact_zone + get_position();
 }
 
-void player::update(float dt){
+void player::update(float dt) {
+
     animated_sprite::update(dt);
 
     vec2<float> dir{{0, 0}};
@@ -28,9 +30,17 @@ void player::update(float dt){
     if(input::is_key_pressed(SDL_SCANCODE_D)) { dir.x += 1; }
     if(input::is_key_pressed(SDL_SCANCODE_W)) { dir.y -= 1; }
     if(input::is_key_pressed(SDL_SCANCODE_S)) { dir.y += 1; }
-
     const float speed = 50;
+
+    unsigned int idx = map::find_cluster_idx(get_position());
     move(dir.x * speed * dt, dir.y * speed * dt);
+    unsigned int new_idx = map::find_cluster_idx(get_position());
+    if(idx != new_idx) {
+        map::clusters[idx].collidables.erase(this);
+        map::clusters[idx].foreground.erase(this);
+        map::clusters[new_idx].collidables.insert(this);
+        map::clusters[new_idx].foreground.insert(this);
+    }
 }
 
 void player::damage(int damage_value) {

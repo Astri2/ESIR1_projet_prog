@@ -11,9 +11,9 @@
 class sprite;
 
 class camera {
-protected:
+//protected:
+public:
     vec2<float> pos, size, inner_pos, inner_size;
-    aabb outer_range;
     float outer_simulation_ratio;
     const sprite* reference = nullptr;
 
