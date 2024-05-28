@@ -11,11 +11,10 @@
 
 class player : public entity, public collidable {
 protected:
-    circle interact_zone;
     const uint32_t max_health;
     uint32_t current_health;
 public :
-    player(float x, float y, float width, float height, int max_health, float interact_r);
+    player(float x, float y, float width, float height, int max_health);
     virtual ~player() override;
     virtual void draw() override;
     virtual void update(float dt) override;

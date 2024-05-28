@@ -28,3 +28,30 @@ inline vec2<T> operator+ (const vec2<T>& lhs, const vec2<T> & rhs){
 
     return nouveau;
 }
+
+template <class T>
+inline vec2<T> operator/ (const vec2<T>& lhs, T rhs){
+    vec2<T> nouveau{};
+    nouveau.x = lhs.x / rhs;
+    nouveau.y = lhs.y / rhs;
+
+    return nouveau;
+}
+
+template <class T>
+inline vec2<T> operator* (const vec2<T>& lhs, T rhs){
+    vec2<T> nouveau{};
+    nouveau.x = lhs.x * rhs;
+    nouveau.y = lhs.y * rhs;
+
+    return nouveau;
+}
+
+template <class T>
+inline vec2<T> operator* (T lhs, const vec2<T>& rhs){
+    vec2<T> nouveau{};
+    nouveau.x = lhs * rhs.x;
+    nouveau.y = lhs * rhs.y;
+
+    return nouveau;
+}
