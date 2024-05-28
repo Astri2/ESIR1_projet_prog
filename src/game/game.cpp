@@ -109,15 +109,15 @@ interactible * game::perceive(const player * user){
     return nearest;
 }
 
-unsigned int game::find_cluster_idx(const vec2<float>& position) const {
+uint32_t game::find_cluster_idx(const vec2<float>& position) const {
     return ((int)position.y/config::map::cluster_height)*this->nb_clusters_x + ((int)position.x/config::map::cluster_width);
 }
 
-std::vector<cluster*> game::get_surrounding_clusters(unsigned int cluster_idx) {
+std::vector<cluster*> game::get_surrounding_clusters(uint32_t cluster_idx) {
     std::vector<cluster*> res;
     for(int i = -1 ; i < 2 ; i++) {
         for(int j = -1 ; j < 2 ; j++) {
-            unsigned int idx = cluster_idx + i * this->nb_clusters_x + j;
+            uint32_t idx = cluster_idx + i * this->nb_clusters_x + j;
             // assuming negatives values aren't to negatives, could use boolean logic in for boundaries instead
             if(idx < this->nb_clusters_x * this->nb_clusters_y)
                 res.push_back(&clusters[idx]);
@@ -127,15 +127,18 @@ std::vector<cluster*> game::get_surrounding_clusters(unsigned int cluster_idx) {
 }
 
 std::vector<cluster *> game::get_cluster_to_blit(camera *camera) {
-    std::vector<cluster*> res;
 
     // computes the rectangle of clusters that should be blit, given the top_left and bottom_right clusters
-    unsigned int top_left_cluster_idx = find_cluster_idx({camera->get_outer_range().top_left()});
-    unsigned int bottom_right_cluster_idx = find_cluster_idx({camera->get_outer_range().bottom_right()});
-    for(unsigned int i = 0 ; i < (bottom_right_cluster_idx-top_left_cluster_idx)/this->nb_clusters_x ; i++) {
-        for(unsigned int j = 0 ; j < (bottom_right_cluster_idx-top_left_cluster_idx)%this->nb_clusters_x ; j++) {
-            unsigned int idx = top_left_cluster_idx + i * this->nb_clusters_x + j;
-            res.push_back(&clusters[idx]);
+    const uint32_t top_left_cluster_idx = find_cluster_idx({camera->get_outer_range().top_left()});
+    const uint32_t bottom_right_cluster_idx = find_cluster_idx({camera->get_outer_range().bottom_right()});
+    const uint32_t dx = (bottom_right_cluster_idx-top_left_cluster_idx)/this->nb_clusters_x;
+    const uint32_t dy = (bottom_right_cluster_idx-top_left_cluster_idx)%this->nb_clusters_x;
+
+    std::vector<cluster*> res(dx*dy);
+    for(uint32_t i = 0 ; i < dx ; i++) {
+        for(uint32_t j = 0 ; j < dy ; j++) {
+            uint32_t idx = top_left_cluster_idx + i * this->nb_clusters_x + j;
+            res.emplace_back(&clusters[idx]);
         }
     }
     return res;
