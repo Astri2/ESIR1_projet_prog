@@ -22,7 +22,8 @@ vec2<float> sprite::get_size() const
     return this->size;
 }
 
-void sprite::draw() const
-{
-    renderer::draw_texture(position, size, sprite_resolution, texture, sprite_offset);
+void sprite::draw(const camera& cam) const {
+    vec4<float> transformed = cam.transform(position, size);
+    renderer::draw_texture({{transformed.x, transformed.y}}, {{transformed.width, transformed.height}},sprite_resolution, texture, sprite_offset);
+
 }

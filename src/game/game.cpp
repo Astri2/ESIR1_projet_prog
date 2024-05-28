@@ -8,36 +8,36 @@
 #include "event.h"
 
 game::game(unsigned int _width, unsigned int _height)
-    : context(_width, _height), m(0, 0), p(new player({{0.f, 100.f}}, {{48.f, 48.f}}, 100))
+    : context(_width, _height), previous_tick(SDL_GetTicks())
 {
-    ui_components.push_back(new health_bar(p, 220, 20, 41, 7));
+    map::load_wsv("../resources/out.txt");
+    // ui_components.push_back(new health_bar(m.player, 220, 20, 41, 7));
 }
 
-game::~game()
-{
-    delete p;
+game::~game() {
     for (auto component : ui_components) delete component;
 }
 
-void game::run()
-{
-    while (running)
-    {
+void game::run() {
+
+    while(running) {
+        uint32_t start_tick = SDL_GetTicks();
+        float dt = static_cast<float>(static_cast<double>(start_tick - previous_tick)/1000.0);
+
         event::manager::update();
+        map::update(dt);
+        for (auto component : ui_components) {
+            component->update(dt);
+        }
+        previous_tick = start_tick;
 
-        p->update(0.1);
-        //        for (auto component : ui_components) {
-        //            component->update(0.1);
-        //        }
-
+        /* Render Pass */
         renderer::clear(0, 0, 0);
-
-        p->draw();
-
-        //        for (auto component : ui_components) {
-        //            component->draw();
-        //        }
-
+        map::draw();
+        for (auto component : ui_components) {
+            component->draw();
+        }
+        // menus
         renderer::present();
     }
 }

@@ -1,12 +1,13 @@
 //
 // Created by malo1 on 5/28/2024.
 //
-
 #pragma once
 
+#include <SDL2/SDL_render.h>
+
+#include "camera.h"
 
 #include "entity/entity.h"
-#include "SDL_render.h"
 
 class sprite : public virtual entity
 {
@@ -22,7 +23,7 @@ public:
 
     vec2<float> get_size() const;
 
-    void draw() const;
+    virtual void draw(const camera& cam) const;
 
     void set_texture(SDL_Texture* texture);
 };
