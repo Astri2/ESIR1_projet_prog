@@ -4,6 +4,9 @@ im = Image.open('map.png') # Can be many different formats.
 pix = im.load()
 
 out = ""
+
+TILE = 0
+
 col_to_texture = {
     (112, 72, 24, 255): "dirt",
     (255, 229, 0, 255): "sand",
@@ -19,7 +22,7 @@ width, height = im.size
 
 for y in range(height):
     for x in range(width):
-        out += f"tile {x * TILE_WIDTH} {y * TILE_HEIGHT} {col_to_texture[pix[x, y]]}\n"
+        out += f"{TILE} {x * TILE_WIDTH} {y * TILE_HEIGHT} {col_to_texture[pix[x, y]]}\n"
 
 with open("out.txt", 'w') as f:
     f.write(out)
