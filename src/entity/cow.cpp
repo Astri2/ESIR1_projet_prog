@@ -12,14 +12,14 @@ cow::cow(vec2<float> pos, vec2<float> size, int max_health):
     entity(pos),
     animated_sprite(pos, size, {{32, 32}}, "../resources/cow.png", {3}, 0.1),
     collidable_entity(pos, aabb{24, 24, 32, 8}),
-    interactible(16,16,32),
+    interactible(16, 16, 32),
     max_health(max_health), current_health(max_health)
 {
 }
 
-void cow::draw(const camera & cam) const
+void cow::draw(const camera& cam) const
 {
-    interactible::draw_interact_zone(cam,position);
+    interactible::draw_interact_zone(cam, position);
     collidable_entity::draw_collide_box(cam);
     sprite::draw(cam);
 }

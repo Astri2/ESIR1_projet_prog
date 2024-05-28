@@ -27,7 +27,7 @@ public :
     int get_current_health() const;
     circle get_interact_zone() const override;
 
-    void draw(const camera & cam) const override;
+    void draw(const camera& cam) const override;
 
     void interact(player* user) override
     {
