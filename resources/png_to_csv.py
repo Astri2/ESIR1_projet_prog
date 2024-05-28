@@ -19,7 +19,7 @@ width, height = im.size
 
 for y in range(height):
     for x in range(width):
-        out += f"tile {x} {y} {col_to_texture[pix[x, y]]}\n"
+        out += f"tile {x * TILE_WIDTH} {y * TILE_HEIGHT} {col_to_texture[pix[x, y]]}\n"
 
 with open("out.txt", 'w') as f:
     f.write(out)
