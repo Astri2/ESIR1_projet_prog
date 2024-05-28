@@ -4,12 +4,8 @@
 
 #include "interactible.h"
 
-interactible::interactible(float x, float y, float interact_r) {
-    interact_zone.rayon = interact_r;
-    interact_zone.position = vec2<float>();
-    interact_zone.position.x = x;
-    interact_zone.position.y = y;
-}
+interactible::interactible(float x, float y, float interact_r)
+    : interact_zone{interact_r, {{x, y}}} {}
 
 const circle & interactible::get_interact_zone() const{
     return interact_zone;

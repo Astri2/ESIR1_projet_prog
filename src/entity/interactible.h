@@ -7,7 +7,7 @@
 #include "physics/circle.h"
 #include "player.h"
 
-class interactible{
+class interactible {
 protected:
     circle interact_zone;
 public :
