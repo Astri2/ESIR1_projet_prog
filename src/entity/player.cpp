@@ -13,7 +13,7 @@
 #include "map/map.h"
 #include "physics/physics.h"
 
-player::player(vec2<float> pos, vec2<float> size, int max_health):
+player::player(vec2<float> pos, vec2<float> size, float max_health):
     entity(pos),
     animated_sprite(pos, size, {{48, 48}}, "../resources/player.png", {4}, 0.1),
     collidable_entity(pos, aabb{24, 28, 32, 20}),
@@ -33,9 +33,9 @@ circle player::get_interact_zone() const
     return interact_zone + get_position();
 }
 
-void player::update(float dt)
-{
+void player::update(float dt){
     animated_sprite::update(dt);
+    damage(dt);
 
     bool actioned = input::is_key_pressed(SDL_SCANCODE_E);
 
@@ -71,7 +71,6 @@ void player::update(float dt)
     if (!colx) move(dposx.x, 0);
     if (!coly) move(0, dposy.y);
 
-
     if(!(colx && coly)) {
         unsigned int new_idx = map::find_cluster_idx(get_position());
         map::clusters[idx].foreground.erase(this);
@@ -83,12 +82,12 @@ void player::update(float dt)
     }
 }
 
-void player::damage(int damage_value)
+void player::damage(float damage_value)
 {
-    current_health = std::max(current_health - damage_value, static_cast<uint32_t>(0));
+    current_health = std::max(current_health - damage_value, 0.f);
 }
 
-void player::benefit(int benefit_value)
+void player::benefit(float benefit_value)
 {
     current_health = std::min(benefit_value + current_health, max_health);
 }

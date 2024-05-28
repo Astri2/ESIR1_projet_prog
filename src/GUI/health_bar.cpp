@@ -9,13 +9,10 @@ health_bar::health_bar(vec2<float> _position, vec2<float> _size, vec2<int> _spri
         : entity(_position),gui_component(_position, _size, _sprite_offset, _sprite_resolution, image_src), p(p), current_health(100.0f), max_health(p->get_max_health()) {}
 
 void health_bar::draw(const camera& cam) const {
-    float health_width = (current_health / max_health) * size.width;
-    int width_offset = 33;
-    int height_offset = 11;
-    int x_offset = 30;
-    int y_offset = 5;
-    renderer::draw_rect(position.x, position.y, health_width - width_offset, size.height - height_offset, renderer::colors::red);
-    renderer::draw_texture({position.x - x_offset, position.y - y_offset}, {size.width, size.height},sprite_resolution, texture, sprite_offset);
+    float health_width = (current_health / max_health) * (29*3);
+
+    renderer::draw_rect(position.x+10*3, position.y+2*3, health_width, 3*3, renderer::colors::red);
+    renderer::draw_texture({position.x, position.y}, {size.width, size.height},sprite_resolution, texture, sprite_offset);
 }
 
 void health_bar::update(float dt) {

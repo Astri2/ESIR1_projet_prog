@@ -120,7 +120,7 @@ void map::load_wsv(const char* file)
             {
                 // init player
                 p = new player({{line.x, line.y}}, {{48.0f, 48.0f}}, 100);
-                game::ui_components.push_back(new health_bar( {config::window::width - 100, 15}, {123,21}, {0,0}, {41,7},"../resources/healthbar.png",p));
+                game::ui_components.push_back(new health_bar( {10, config::window::height - 25}, {123,21}, {0,0}, {41,7},"../resources/healthbar.png",p));
 
 
                 clusters[idx].foreground.insert(p);
@@ -141,6 +141,14 @@ void map::load_wsv(const char* file)
     clusters[idx].foreground.insert(m_cow);
     clusters[idx].collidables.insert(m_cow);
     clusters[idx].interactibles.insert(m_cow);
+
+    vec2<float> pos2 = {{1055, 1055}};
+
+    uint32_t idx2 = map::find_cluster_idx(pos2);
+    cow* m_cow2 = new cow(pos2, {{32.0f, 32.0f}}, 100);
+    clusters[idx2].foreground.insert(m_cow2);
+    clusters[idx2].collidables.insert(m_cow2);
+    clusters[idx2].interactibles.insert(m_cow2);
 }
 
 void map::draw()

@@ -19,8 +19,8 @@ cow::cow(vec2<float> pos, vec2<float> size, int max_health):
 
 void cow::draw(const camera& cam) const
 {
-    interactible::draw_interact_zone(cam, position);
-    collidable_entity::draw_collide_box(cam);
+    //interactible::draw_interact_zone(cam, position);
+    //collidable_entity::draw_collide_box(cam);
     sprite::draw(cam);
 }
 
