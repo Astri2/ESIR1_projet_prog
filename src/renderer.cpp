@@ -44,9 +44,9 @@ namespace renderer {
         SDL_RenderFillRectF(renderer, &rect);
     }
 
-    void draw_texture(float x, float y, float width, float height,int res_x,int res_y, SDL_Texture* texture, int frame) {
-        SDL_Rect rect1 { frame*res_x, 0, res_x, res_y };
-        SDL_FRect rect2 { x, y, width, height };
+    void draw_texture(vec2<float> position, vec2<float> size, vec2<int> resolution, SDL_Texture* texture, vec2<int> frame) {
+        SDL_Rect rect1 { frame.x*resolution.width, frame.y*resolution.height, resolution.width, resolution.height };
+        SDL_FRect rect2 { position.x, position.y, size.width, size.height };
 
         SDL_RenderCopyF(renderer, texture, &rect1, &rect2);
     }

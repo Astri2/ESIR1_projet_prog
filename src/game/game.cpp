@@ -18,19 +18,22 @@ game::~game() {
 }
 
 void game::run() {
-    vec2 vec;
-     vec.x=1;
-     vec.y=1;
+    vec2<float> position;
+    position.x=0;
+    position.y=0;
 
-     vec2 vec0;
-     vec0.x=48;
-     vec0.y=48;
+    vec2<int> resolution;
+    resolution.width=48;
+    resolution.height=48;
 
-     vec2 vec1;
-     vec1.x=100;
-     vec1.y=100;
+     vec2<float> size;
+    size.width=100;
+    size.height=100;
 
-    sprite test("../resources/test.bmp",vec,vec1,vec0,4);
+    std::vector<int> max_frames;
+    max_frames.push_back(4);
+
+    sprite test("../resources/test.bmp",position,size,resolution,max_frames);
 
      int a = test.load_texture();
      std::cout<<a;

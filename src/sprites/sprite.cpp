@@ -9,7 +9,7 @@
 #include "renderer.h"
 
 void sprite::draw() const {
-    renderer::draw_texture(position.x,position.y,size.x,size.y,static_cast<int>(frame_resolution.x),static_cast<int>(frame_resolution.y),texture,static_cast<int>(frame));
+    renderer::draw_texture(position,size,frame_resolution,texture,get_frame());
 }
 
 sprite::~sprite() {
@@ -18,11 +18,11 @@ sprite::~sprite() {
 
 void sprite::update(float dt)
 {
-    frame += dt;
+    frame_x += dt;
 
-    if (frame > static_cast<float>(frames))
-    {
-        frame -= static_cast<float>(frames);
+    if (frame_x > static_cast<float>(max_frames[frame_y])) {
+        frame_x -= static_cast<float>(max_frames[frame_y]);
+        //frame_y += dt;
     }
 }
 
@@ -32,4 +32,12 @@ int sprite::load_texture() {
 
 void sprite::set_texture(SDL_Texture* texture){
     this->texture = texture;
+}
+
+vec2<int> sprite::get_frame() const{
+    vec2<int> ret_vec;
+    ret_vec.x = static_cast<int>(frame_x);
+    ret_vec.y = static_cast<int>(frame_y);
+
+    return ret_vec;
 }
