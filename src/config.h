@@ -7,6 +7,8 @@
 
 namespace config {
 
+    constexpr float tick_time = 1.f/30.f;
+
     namespace viewport {
 
         constexpr uint16_t width = 240;
