@@ -3,14 +3,10 @@
 //
 #pragma once
 
-#include <vector>
 
 #include "camera.h"
-#include "config.h"
 #include "cluster.h"
 #include "entity/player.h"
-
-#include "utils/vec2.h"
 
 namespace map {
 
@@ -21,5 +17,7 @@ namespace map {
 
     void draw();
     void update(float dt);
+    uint32_t find_cluster_idx(const vec2<float>& position);
+    std::vector<cluster*> get_surrounding_clusters(uint32_t cluster_idx);
 
 } // namespace map

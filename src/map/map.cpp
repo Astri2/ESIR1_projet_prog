@@ -5,10 +5,13 @@
 #include <iostream>
 
 #include <cstring> // memset 0
-#include <cassert>
+#include <vector>
 
 #include "map.h"
+#include "config.h"
+#include "cluster.h"
 #include "entity/entity.h"
+#include "entity/cow.h"
 
 camera map::cam;
 player *map::p;
@@ -16,8 +19,6 @@ player *map::p;
 static std::vector<cluster> clusters;
 static unsigned int nb_clusters_x, nb_clusters_y;
 
-static uint32_t find_cluster_idx(const vec2<float>& position);
-static std::vector<cluster*> get_surrounding_clusters(uint32_t cluster_idx);
 static std::vector<cluster const*> get_cluster_to_blit(const camera & camera);
 
 struct csv_line {
@@ -88,7 +89,7 @@ void map::load_wsv(const char * file){
 
     for (; input_file.getline(buffer, 2048); ) {
         csv_line line = read_csv_line(buffer);
-        uint32_t idx = find_cluster_idx({{line.x, line.y}});
+        uint32_t idx = map::find_cluster_idx({{line.x, line.y}});
         switch (line.type) {
             case csv_line::entity_type::tile: {
                 clusters[idx].background.push_back(new sprite({{line.x, line.y}},
@@ -106,6 +107,13 @@ void map::load_wsv(const char * file){
             } break;
         }
     }
+
+    vec2<float> pos = {{960, 960}};
+
+    uint32_t idx = map::find_cluster_idx(pos);
+    cow * m_cow = new cow(pos, {{ 32.0f, 32.0f }}, 100);
+    clusters[idx].foreground.insert(m_cow);
+    clusters[idx].collidables.insert(m_cow);
 }
 
 void map::draw() {
@@ -137,11 +145,11 @@ void map::update(float dt) {
 
 // protected utilities
 
-uint32_t find_cluster_idx(const vec2<float>& position) {
+uint32_t map::find_cluster_idx(const vec2<float>& position) {
     return ((int)position.y/config::map::cluster_height)*nb_clusters_x + ((int)position.x/config::map::cluster_width);
 }
 
-std::vector<cluster*> get_surrounding_clusters(uint32_t cluster_idx) {
+std::vector<cluster*> map::get_surrounding_clusters(uint32_t cluster_idx) {
     std::vector<cluster*> res;
     for(int i = -1 ; i < 2 ; i++) {
         for(int j = -1 ; j < 2 ; j++) {
@@ -157,8 +165,8 @@ std::vector<cluster*> get_surrounding_clusters(uint32_t cluster_idx) {
 std::vector<cluster const*> get_cluster_to_blit(const camera & camera) {
 
     // computes the rectangle of clusters that should be blit, given the top_left and bottom_right clusters
-    const uint32_t top_left_cluster_idx = find_cluster_idx({camera.get_outer_range().top_left()});
-    const uint32_t bottom_right_cluster_idx = find_cluster_idx({camera.get_outer_range().bottom_right()});
+    const uint32_t top_left_cluster_idx = map::find_cluster_idx({camera.get_outer_range().top_left()});
+    const uint32_t bottom_right_cluster_idx = map::find_cluster_idx({camera.get_outer_range().bottom_right()});
     const uint32_t dx = (bottom_right_cluster_idx-top_left_cluster_idx)%nb_clusters_x;
     const uint32_t dy = (bottom_right_cluster_idx-top_left_cluster_idx)/nb_clusters_x;
 

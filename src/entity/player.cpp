@@ -3,13 +3,20 @@
 //
 #include <algorithm>
 #include "player.h"
+
+#include <iostream>
+#include <ostream>
+
+#include "cluster.h"
 #include "renderer.h"
 #include "input.h"
+#include "map/map.h"
+#include "physics/physics.h"
 
 player::player(vec2<float> pos, vec2<float> size, int max_health):
     entity(pos),
     animated_sprite(pos, size, {{48, 48}}, "../resources/player.png", {4}, 0.1),
-    collidable_entity(pos, aabb{0.f, 0.f, size.width, size.height}),
+    collidable_entity(pos, aabb{0.f, size.width, size.height, 0.f}),
     max_health(max_health), current_health(max_health)
 {
 }
@@ -24,6 +31,8 @@ void player::update(float dt)
 {
     animated_sprite::update(dt);
 
+
+
     vec2<float> dir{{0, 0}};
 
     if (input::is_key_pressed(SDL_SCANCODE_A)) { dir.x -= 1; }
@@ -32,7 +41,23 @@ void player::update(float dt)
     if (input::is_key_pressed(SDL_SCANCODE_S)) { dir.y += 1; }
 
     const float speed = 50;
-    move(dir.x * speed * dt, dir.y * speed * dt);
+
+    vec2<float> dposx = {{dir.x * speed * dt, 0}};
+    vec2<float> dposy = {{0, dir.y * speed * dt}};
+
+    uint32_t idefix = map::find_cluster_idx(get_position());
+    std::vector<cluster*> m_clusters = map::get_surrounding_clusters(idefix);
+
+    bool colx = physics::check_collide(this,dposx,m_clusters);
+    bool coly = physics::check_collide(this,dposy,m_clusters);
+
+    if (!colx) {
+        move(dposx.x,0);
+    }
+
+    if (!coly) {
+        move(0,dposy.y);
+    }
 }
 
 void player::damage(int damage_value)

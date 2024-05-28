@@ -75,6 +75,7 @@ set(exec
         src/entity/cow.h
 
         src/utils/vec4.h
+        src/entity/cow.cpp
 
 )
 
