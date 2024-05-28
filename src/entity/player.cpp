@@ -2,11 +2,14 @@
 // Created by celia on 27/05/2024.
 //
 #include <algorithm>
+#include <cassert>
 #include "player.h"
 #include "renderer.h"
 
 player::player(float x, float y, float width, float height, int max_health, float interact_r)
-        : entity(x, y, width, height), max_health(max_health), current_health(max_health)    {
+        : entity(x, y, width, height), max_health(max_health), current_health(max_health),
+        keyboard_state(SDL_GetKeyboardState(&keyboard_size))
+{
     interact_zone.rayon = interact_r;
     interact_zone.position = entity::position;
 }
@@ -22,8 +25,16 @@ void player::draw(){
 }
 
 void player::update(float dt){
+
+    vec2<float> dir{{0, 0}};
+
+    if(is_key_pressed(SDL_SCANCODE_A)) { dir.x -= 1; }
+    if(is_key_pressed(SDL_SCANCODE_D)) { dir.x += 1; }
+    if(is_key_pressed(SDL_SCANCODE_W)) { dir.y -= 1; }
+    if(is_key_pressed(SDL_SCANCODE_S)) { dir.y += 1; }
+
     const float speed = 10;
-    move(speed * dt, 0);
+    move(dir.x * speed * dt, dir.y * speed * dt);
 }
 
 void player::damage(int damage_value) {
