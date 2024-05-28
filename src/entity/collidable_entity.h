@@ -8,9 +8,11 @@
 #include "entity.h"
 #include "physics/collidable.h"
 
-class collidable_entity: public collidable, public virtual entity {
+class collidable_entity : public collidable, public virtual entity
+{
 protected:
     aabb collide_box;
+
 public:
     collidable_entity(vec2<float> pos, aabb _collide_box);
 

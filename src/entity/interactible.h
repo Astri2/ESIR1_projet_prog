@@ -6,13 +6,15 @@
 #include "physics/circle.h"
 #include "player.h"
 
-class interactible {
+class interactible
+{
 protected:
     circle interact_zone;
+
 public :
     interactible(float x, float y, float interact_r);
 
-    const circle & get_interact_zone() const;
+    const circle& get_interact_zone() const;
 
-    virtual void interact(player * user) = 0;
+    virtual void interact(player* user) = 0;
 };
