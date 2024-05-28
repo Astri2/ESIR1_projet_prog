@@ -19,8 +19,8 @@ public :
     void update(float dt) override;
     void damage(float damage_value);
     void benefit(float benefit_value);
-    int get_max_health() const;
-    int get_current_health() const;
+    float get_max_health() const;
+    float get_current_health() const;
     circle get_interact_zone() const;
 
     void draw(const camera & cam) const override;

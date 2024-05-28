@@ -92,12 +92,12 @@ void player::benefit(float benefit_value)
     current_health = std::min(benefit_value + current_health, max_health);
 }
 
-int player::get_max_health() const
+float player::get_max_health() const
 {
     return max_health;
 }
 
-int player::get_current_health() const
+float player::get_current_health() const
 {
     return current_health;
 }

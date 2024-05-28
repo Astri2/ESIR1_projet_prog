@@ -15,18 +15,18 @@
 class cow : public animated_sprite, public collidable_entity, public interactible
 {
 protected:
-    const uint32_t max_health;
-    uint32_t current_health;
+    const float max_health;
+    float current_health;
     float max_delai_interact = 2.0f;
     float delai_interact = max_delai_interact;
 
 public :
     cow(vec2<float> pos, vec2<float> size, int max_health);
     void update(float dt) override;
-    void damage(int damage_value);
-    void benefit(int benefit_value);
-    int get_max_health() const;
-    int get_current_health() const;
+    void damage(float damage_value);
+    void benefit(float benefit_value);
+    float get_max_health() const;
+    float get_current_health() const;
     circle get_interact_zone() const override;
 
     void draw(const camera& cam) const override;

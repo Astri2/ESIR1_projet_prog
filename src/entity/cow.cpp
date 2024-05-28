@@ -51,22 +51,22 @@ void cow::update(float dt)
     move(dir.x * speed * dt, dir.y * speed * dt);
 }
 
-void cow::damage(int damage_value)
+void cow::damage(float damage_value)
 {
-    current_health = std::max(current_health - damage_value, static_cast<uint32_t>(0));
+    current_health = std::max(current_health - damage_value, 0.f);
 }
 
-void cow::benefit(int benefit_value)
+void cow::benefit(float benefit_value)
 {
     current_health = std::min(benefit_value + current_health, max_health);
 }
 
-int cow::get_max_health() const
+float cow::get_max_health() const
 {
     return max_health;
 }
 
-int cow::get_current_health() const
+float cow::get_current_health() const
 {
     return current_health;
 }

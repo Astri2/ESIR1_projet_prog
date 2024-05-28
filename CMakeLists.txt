@@ -76,6 +76,10 @@ set(exec
 
         src/utils/vec4.h
         src/entity/cow.cpp
+        src/entity/tomato_crop.h
+        src/entity/crop.cpp
+        src/entity/crop.h
+        src/entity/wheat_crop.h
 
 )
 

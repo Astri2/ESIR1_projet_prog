@@ -12,6 +12,8 @@
 #include "cluster.h"
 #include "entity/entity.h"
 #include "entity/cow.h"
+#include "entity/tomato_crop.h"
+#include "entity/wheat_crop.h"
 #include "game/game.h"
 
 camera map::cam;
@@ -145,10 +147,17 @@ void map::load_wsv(const char* file)
     vec2<float> pos2 = {{1055, 1055}};
 
     uint32_t idx2 = map::find_cluster_idx(pos2);
-    cow* m_cow2 = new cow(pos2, {{32.0f, 32.0f}}, 100);
-    clusters[idx2].foreground.insert(m_cow2);
-    clusters[idx2].collidables.insert(m_cow2);
-    clusters[idx2].interactibles.insert(m_cow2);
+    tomato_crop* m_tomato_crop = new tomato_crop(pos2, {{16.0f, 16.0f}});
+    clusters[idx2].foreground.insert(m_tomato_crop);
+    clusters[idx2].interactibles.insert(m_tomato_crop);
+
+
+    vec2<float> pos3 = {{1020, 1055}};
+
+    uint32_t idx3 = map::find_cluster_idx(pos3);
+    wheat_crop* m_wheat_crop = new wheat_crop(pos3, {{16.0f, 16.0f}});
+    clusters[idx3].foreground.insert(m_wheat_crop);
+    clusters[idx3].interactibles.insert(m_wheat_crop);
 }
 
 void map::draw()
