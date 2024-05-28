@@ -2,39 +2,32 @@
 // Created by celia on 27/05/2024.
 //
 #include <algorithm>
-#include <cassert>
 #include "player.h"
 #include "renderer.h"
+#include "input.h"
 
-player::player(float x, float y, float width, float height, int max_health, float interact_r)
-        : entity(x, y, width, height), max_health(max_health), current_health(max_health),
-        keyboard_state(SDL_GetKeyboardState(&keyboard_size))
+player::player(vec2<float> pos, vec2<float> size, int max_health):
+        entity(pos),
+        animated_sprite(pos, size, {{48, 48}}, "../resources/test.bmp", {4}, 0.1),
+        collidable_entity(pos, aabb{0.f, 0.f, size.width, size.height}),
+        max_health(max_health), current_health(max_health)
 {
-    interact_zone.rayon = interact_r;
-    interact_zone.position = entity::position;
 }
 
-
-player::~player(){}
-
-void player::draw(){
-    renderer::draw_rect(position.x, position.y, size.width, size.height, renderer::colors::red);
-}
-
-const circle player::get_interact_zone() const{
+circle player::get_interact_zone() const{
     circle interact_zone{15,size/2.0f};
     return interact_zone + get_position();
 }
 
-
 void player::update(float dt){
+    animated_sprite::update(dt);
 
     vec2<float> dir{{0, 0}};
 
-    if(is_key_pressed(SDL_SCANCODE_A)) { dir.x -= 1; }
-    if(is_key_pressed(SDL_SCANCODE_D)) { dir.x += 1; }
-    if(is_key_pressed(SDL_SCANCODE_W)) { dir.y -= 1; }
-    if(is_key_pressed(SDL_SCANCODE_S)) { dir.y += 1; }
+    if(input::is_key_pressed(SDL_SCANCODE_A)) { dir.x -= 1; }
+    if(input::is_key_pressed(SDL_SCANCODE_D)) { dir.x += 1; }
+    if(input::is_key_pressed(SDL_SCANCODE_W)) { dir.y -= 1; }
+    if(input::is_key_pressed(SDL_SCANCODE_S)) { dir.y += 1; }
 
     const float speed = 10;
     move(dir.x * speed * dt, dir.y * speed * dt);
