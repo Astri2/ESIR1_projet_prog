@@ -7,7 +7,7 @@
 #include "physics/circle.h"
 #include <cstdint>
 
-#include "collidable.h"
+#include "physics/collidable.h"
 #include "sprite.h"
 #include "animated_sprite.h"
 #include "collidable_entity.h"

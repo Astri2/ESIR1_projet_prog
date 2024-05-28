@@ -6,7 +6,7 @@
 
 
 #include "entity.h"
-#include "collidable.h"
+#include "physics/collidable.h"
 
 class collidable_entity: public collidable, public virtual entity {
 protected:

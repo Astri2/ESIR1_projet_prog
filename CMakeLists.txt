@@ -49,25 +49,17 @@ set(exec
         
         src/cluster.cpp
         src/cluster.h
-
-        src/sprites/old_sprite.cpp
-        src/sprites/old_sprite.h
+        
+        src/sprites/sprite.cpp
+        src/sprites/sprite.h
 
         src/GUI/health_bar.cpp
         src/GUI/health_bar.h
 
         src/GUI/gui_component.cpp
         src/GUI/gui_component.h
-        src/entity/collidable.h
-        src/entity/movable.cpp
-        src/entity/movable.h
-        src/entity/sprite.cpp
-        src/entity/sprite.h
-        src/texture_manager.h
-        src/entity/animated_sprite.cpp
-        src/entity/animated_sprite.h
-        src/entity/collidable_entity.cpp
-        src/entity/collidable_entity.h
+        src/physics/collidable.cpp
+        src/physics/collidable.h
 )
 
 # SDL2_image sources

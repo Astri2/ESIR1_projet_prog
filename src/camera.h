@@ -21,5 +21,5 @@ public:
 
     void change_reference(const sprite* _reference);
 
-    const aabb& get_outer_range();
+    const aabb& get_outer_range() const;
 };

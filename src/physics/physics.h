@@ -7,7 +7,7 @@
 
 #include "aabb.h"
 #include "circle.h"
-#include "entity/collidable.h"
+#include "collidable.h"
 
 namespace physics {
 

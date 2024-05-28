@@ -28,6 +28,6 @@ void camera::update() {
 
 void camera::change_reference(const sprite* _reference) { this->reference = _reference; }
 
-const aabb &camera::get_outer_range() {
+const aabb &camera::get_outer_range() const {
     return this->outer_range;
 }
