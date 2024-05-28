@@ -8,7 +8,7 @@
 
 player::player(vec2<float> pos, vec2<float> size, int max_health):
         entity(pos),
-        animated_sprite(pos, size, {{48, 48}}, "../resources/test.bmp", {4}, 0.1),
+        animated_sprite(pos, size, {{48, 48}}, "../resources/player.png", {4}, 0.1),
         collidable_entity(pos, aabb{0.f, 0.f, size.width, size.height}),
         max_health(max_health), current_health(max_health)
 {
