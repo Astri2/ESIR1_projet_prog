@@ -13,7 +13,7 @@ camera::camera(float _x, float _y, float _width, float _height, float free_move_
         outer_range({_y - _height*(outer_simulation_ratio-1.f)/2.f, _x + _width*(outer_simulation_ratio+1.f)/2.f, _y + _height*(outer_simulation_ratio+1.f)/2.f, _x - _width*(outer_simulation_ratio-1.f)/2.f}),
         reference(_reference)
 {
-    assert(0.f < free_move_ratio && free_move_ratio <= 1.f);
+    assert(0.f < free_move_ratio && free_move_ratio <= 1.f && "free move ratio must be between 0 and 1");
 //    assert(outer_simulation_ratio >= 1.f);
 }
 

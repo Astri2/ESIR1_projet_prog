@@ -17,16 +17,14 @@ struct compare {
 
 class cluster {
 private:
-    // trying to add y sort comparator
+    aabb collision_box;
+
+public:
     std::set<entity*, compare> entities;
     std::set<interactible*, compare> interactibles;
-    aabb collision_box;
     //movables?
-public:
+
     explicit cluster(const aabb& _collide_box);
 
-    std::set<entity*, compare>& get_entities();
-    std::set<interactible*, compare>& get_interactibles();
-    const std::set<interactible*, compare>& get_interactibles() const;
-    const aabb& get_collision_box();
+    const aabb& get_collision_box() const;
 };

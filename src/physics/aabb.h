@@ -8,11 +8,11 @@
 struct aabb {
     float top, right, bottom, left;
 
-    vec2 top_left() const {return {{left, top}};}
-    vec2 bottom_left() const {return {{left, bottom}};}
-    vec2 bottom_right() const {return {{right, bottom}};}
-    vec2 top_right() const {return {{right, top}};}
-    vec2 center() const {return {{(left+right)/2.f, (top+bottom)/2.f}};}
+    vec2<float> top_left() const {return {{left, top}};}
+    vec2<float> bottom_left() const {return {{left, bottom}};}
+    vec2<float> bottom_right() const {return {{right, bottom}};}
+    vec2<float> top_right() const {return {{right, top}};}
+    vec2<float> center() const {return {{(left+right)/2.f, (top+bottom)/2.f}};}
 };
 
 inline aabb operator+ (const aabb& old, const vec2<float> & dpos){
