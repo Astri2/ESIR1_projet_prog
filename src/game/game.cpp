@@ -10,11 +10,16 @@
 #include "event.h"
 #include "sprites/sprite.h"
 
- game::game(unsigned int _width, unsigned int _height)
-    : context(_width, _height), p(new player(0, 0, 5, 5, 5)) {}
+game::game(unsigned int _width, unsigned int _height)
+    : context(_width, _height), p(new player(0, 0, 5, 5, 100, 5)) {
+    ui_components.push_back(new health_bar(p, 220, 20, 200, 15));
+}
 
 game::~game() {
     delete p;
+    for (auto component : ui_components) {
+        delete component;
+    }
 }
 
 void game::run() {
@@ -45,11 +50,19 @@ void game::run() {
 
         test.update(0.1);
 
+        for (auto component : ui_components) {
+            component->update(0.1);
+        }
+
         renderer::clear(0, 0, 0);
 
         p->draw();
 
         test.draw();
+
+        for (auto component : ui_components) {
+            component->draw();
+        }
 
         renderer::present();
     }

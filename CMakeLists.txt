@@ -46,6 +46,12 @@ set(exec
         src/color.h
         src/sprites/sprite.cpp
         src/sprites/sprite.h
+
+        src/GUI/health_bar.cpp
+        src/GUI/health_bar.h
+
+        src/GUI/gui_component.cpp
+        src/GUI/gui_component.h
 )
 
 IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
