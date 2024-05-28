@@ -20,9 +20,10 @@ col_to_texture = {
 TILE_WIDTH, TILE_HEIGHT = 16, 16
 width, height = im.size
 
+out += str(width * TILE_WIDTH) + " " + str(height * TILE_HEIGHT) + "\n"
 for y in range(height):
     for x in range(width):
-        out += f"{TILE} {x * TILE_WIDTH} {y * TILE_HEIGHT} {col_to_texture[pix[x, y]]}\n"
+        out += f"0 {x * TILE_WIDTH} {y * TILE_HEIGHT} {col_to_texture[pix[x, y]]}\n"
 
 with open("out.txt", 'w') as f:
     f.write(out)
