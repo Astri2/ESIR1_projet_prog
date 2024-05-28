@@ -20,7 +20,10 @@ bool physics::are_colliding(const aabb & collide_1,const aabb & collide_2){
 }
 
 float physics::shared_distance(const circle & collide_1, const circle & collide_2) {
-    return std::max( 0.0f , (collide_1.rayon + collide_2.rayon) - collide_1.position.distance(collide_2.position) ) ;
+    float r = (collide_1.rayon + collide_2.rayon);
+    float d = collide_1.position.distance(collide_2.position);
+    float c = r - d;
+    return std::max( 0.0f , c ) ;
 }
 
 bool physics::check_collide(const collidable * entity_collide,vec2<float> dpos, const std::vector<cluster*> & clusters){

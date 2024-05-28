@@ -108,12 +108,13 @@ void map::load_wsv(const char * file){
         }
     }
 
-    vec2<float> pos = {{960, 960}};
+    vec2<float> pos = {{1000, 1000}};
 
     uint32_t idx = map::find_cluster_idx(pos);
     cow * m_cow = new cow(pos, {{ 32.0f, 32.0f }}, 100);
     clusters[idx].foreground.insert(m_cow);
     clusters[idx].collidables.insert(m_cow);
+    clusters[idx].interactibles.insert(m_cow);
 }
 
 void map::draw() {
@@ -136,6 +137,8 @@ void map::update(float dt) {
         for(entity* e : c->background) {
             e->update(dt);
         }
+
+        int a = c->foreground.size();
         for(entity* e : c->foreground) {
             e->update(dt);
         }
@@ -178,4 +181,22 @@ std::vector<cluster const*> get_cluster_to_blit(const camera & camera) {
         }
     }
     return res;
+}
+
+interactible * map::perceive(player * user, std::vector<cluster *> clusters){
+    interactible * nearest = nullptr;
+    float nearest_dist = 0.0f;
+
+    for(cluster* c : clusters) {
+        for (interactible * objet : c->interactibles){
+            const float shared_dist = physics::shared_distance(user->get_interact_zone(), objet->get_interact_zone());
+
+            if( shared_dist > nearest_dist ) {
+                nearest = objet;
+                nearest_dist = shared_dist;
+            }
+        }
+    }
+
+    return nearest;
 }

@@ -16,8 +16,7 @@ player::player(vec2<float> pos, vec2<float> size, int max_health):
     animated_sprite(pos, size, {{48, 48}}, "../resources/player.png", {4}, 0.1),
     collidable_entity(pos, aabb{24, 28, 32, 20}),
     max_health(max_health), current_health(max_health)
-{
-}
+{}
 
 void player::draw(const camera & cam) const
 {
@@ -27,13 +26,17 @@ void player::draw(const camera & cam) const
 
 circle player::get_interact_zone() const
 {
-    circle interact_zone{15, size / 2.0f};
+    circle interact_zone{8, size / 2.0f};
     return interact_zone + get_position();
 }
 
 void player::update(float dt)
 {
     animated_sprite::update(dt);
+
+    bool actioned = input::is_key_pressed(SDL_SCANCODE_E);
+
+
 
     vec2<float> dir{{0, 0}};
 
@@ -43,10 +46,18 @@ void player::update(float dt)
     if(input::is_key_pressed(SDL_SCANCODE_S)) { dir.y += 1; }
     const float speed = 50;
 
-    if (dir.x == 0 && dir.y == 0) return;
+    if (dir.x == 0 && dir.y == 0 && !actioned) return;
 
     uint32_t idx = map::find_cluster_idx(get_position());
     std::vector<cluster*> m_clusters = map::get_surrounding_clusters(idx);
+
+    if (actioned) {
+        interactible * cc = map::perceive(this,m_clusters);
+
+        if (cc != nullptr) cc -> interact(this);
+    }
+
+    if (dir.x == 0 && dir.y == 0) return;
 
     vec2<float> dposx = {{dir.x * speed * dt, 0}};
     vec2<float> dposy = {{0, dir.y * speed * dt}};

@@ -6,10 +6,13 @@
 
 #include "physics/circle.h"
 #include <cstdint>
+#include <iostream>
+
 #include "animated_sprite.h"
 #include "collidable_entity.h"
+#include "interactible.h"
 
-class cow : public animated_sprite, public collidable_entity
+class cow : public animated_sprite, public collidable_entity, public interactible
 {
 protected:
     const uint32_t max_health;
@@ -22,7 +25,12 @@ public :
     void benefit(int benefit_value);
     int get_max_health() const;
     int get_current_health() const;
-    circle get_interact_zone() const;
+    circle get_interact_zone() const override;
 
     void draw(const camera & cam) const override;
+
+    void interact(player* user) override
+    {
+        std::cout << "meuh" << std::endl;
+    }
 };

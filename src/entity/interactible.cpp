@@ -9,7 +9,7 @@ interactible::interactible(float x, float y, float interact_r)
 {
 }
 
-const circle& interactible::get_interact_zone() const
+circle interactible::get_interact_zone() const
 {
     return interact_zone;
 }

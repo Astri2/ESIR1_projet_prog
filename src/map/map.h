@@ -7,6 +7,7 @@
 #include "camera.h"
 #include "cluster.h"
 #include "entity/player.h"
+#include "physics/physics.h"
 
 namespace map {
 
@@ -23,4 +24,8 @@ namespace map {
 
     extern std::vector<cluster> clusters;
     uint32_t find_cluster_idx(const vec2<float>& position);
+
+    interactible * perceive(player * user, std::vector<cluster *> clusters);
+
+
 } // namespace map

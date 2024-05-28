@@ -53,23 +53,3 @@ void game::handle_event(const SDL_Event& event)
         break;
     }
 }
-
-/*
-interactible * game::perceive(const player * user){
-    interactible * nearest = nullptr;
-    float nearest_dist = 0;
-
-    for(cluster* c : get_surrounding_clusters(find_cluster_idx(user->get_position()))) {
-        for (interactible * objet : c->interactibles){
-            const float shared_dist = physics::shared_distance(user->get_interact_zone() , objet->get_interact_zone());
-
-            if( shared_dist > nearest_dist ) {
-                nearest = objet;
-                nearest_dist = shared_dist;
-            }
-        }
-    }
-
-    return nearest;
-}
-*/
