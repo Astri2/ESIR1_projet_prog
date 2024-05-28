@@ -10,13 +10,14 @@ animated_sprite::animated_sprite(vec2<float> _position, vec2<float> _size, vec2<
     sprite(_position, _size, {{0, animation_id}}, _frame_resolution, image_src),
     time(0), frame_time(_frame_time), animation_lengths(_animation_lengths)
 {
-
 }
 
-void animated_sprite::update(float dt) {
+void animated_sprite::update(float dt)
+{
     time += dt;
-    if(time >= frame_time) {
+    if (time >= frame_time)
+    {
         time -= frame_time;
-        sprite_offset.x = (sprite_offset.x+1) % animation_lengths[sprite_offset.y];
+        sprite_offset.x = (sprite_offset.x + 1) % animation_lengths[sprite_offset.y];
     }
 }

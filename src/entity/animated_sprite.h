@@ -8,7 +8,8 @@
 #include "sprite.h"
 #include <vector>
 
-class animated_sprite: public sprite {
+class animated_sprite : public sprite
+{
 protected:
     float time;
     const float frame_time;

@@ -5,9 +5,12 @@
 
 #include <SDL2/SDL_render.h>
 
+#include "camera.h"
+
 #include "entity/entity.h"
 
-class sprite: public virtual entity {
+class sprite : public virtual entity
+{
 protected:
     vec2<float> size;
     vec2<uint32_t> sprite_offset;
@@ -15,12 +18,12 @@ protected:
     SDL_Texture* texture = nullptr;
 
 public:
-    sprite(vec2<float> _position, vec2<float> _size, vec2<uint32_t> _sprite_offset, vec2<uint32_t> _frame_resolution, const char* image_src);
+    sprite(vec2<float> _position, vec2<float> _size, vec2<uint32_t> _sprite_offset, vec2<uint32_t> _frame_resolution,
+           const char* image_src);
 
     vec2<float> get_size() const;
 
-    void draw() const;
+    virtual void draw(const camera& cam) const;
 
     void set_texture(SDL_Texture* texture);
-
 };

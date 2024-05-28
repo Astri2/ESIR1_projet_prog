@@ -9,8 +9,8 @@
 #include "SDL2/SDL.h"
 #include "entity/sprite.h"
 
-namespace renderer {
-
+namespace renderer
+{
     bool initialize(void* window);
     void terminate();
 

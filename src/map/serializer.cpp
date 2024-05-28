@@ -67,6 +67,7 @@ namespace serializer {
         uint32_t val;
         is >> val;
         assert(val < (uint32_t)map_row::entity_type::count && "Assertion Failed : value is not a valid entity type !");
+        type = (map_row::entity_type)val;
         return is;
     }
 

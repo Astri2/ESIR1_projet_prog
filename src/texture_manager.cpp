@@ -12,13 +12,16 @@ namespace texture_manager {
         uint32_t val;
         is >> val;
         assert(val < (size_t)atlases::count && "Assertion Failed : value is not a valid atlas id !");
+        a = (atlases)val;
         return is;
     }
 
+#define ATLAS_PATH(next) "../resources/tiles/" next
+
     std::array<std::string, (size_t)atlases::count> atlases_name {
-            "../resources/atlases/grass.png",
-            "../resources/atlases/sand.png",
-            "../resources/atlases/dirt.png",
+            ATLAS_PATH("grass.png"),
+            ATLAS_PATH("sand.png"),
+            ATLAS_PATH("dirt.png"),
     };
 
     std::unordered_map<std::string, SDL_Texture*> loaded_textures;
