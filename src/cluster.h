@@ -20,9 +20,10 @@ private:
     aabb collision_box;
 
 public:
-    std::set<entity*, compare> entities;
-    std::set<interactible*, compare> interactibles;
-    //movables?
+    std::set<entity*> background;
+    std::set<entity*, compare> foreground;
+        std::set<entity*> collidables;
+        std::set<interactible*> interactibles;
 
     explicit cluster(const aabb& _collide_box);
 
