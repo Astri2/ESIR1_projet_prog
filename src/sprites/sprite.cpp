@@ -31,7 +31,6 @@ void sprite::update(float dt)
     }
 }
 
-
 void sprite::set_frame_y(int frame){
     frame_y = frame;
 }
