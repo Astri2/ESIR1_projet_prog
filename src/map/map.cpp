@@ -34,6 +34,9 @@ void map::load(const char *file) {
     constexpr uint16_t cw = config::map::cluster_width;
     constexpr uint16_t ch = config::map::cluster_height;
 
+    // TODO BIG BIG BIG MEMORY LEAK
+    clusters.clear();
+
     nb_clusters_x = std::ceil((float) data.header.width / cw);
     nb_clusters_y = std::ceil((float) data.header.height / ch);
     for (unsigned int y = 0; y < nb_clusters_y; y++) {
