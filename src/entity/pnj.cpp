@@ -11,7 +11,7 @@ pnj::pnj(vec2<float> pos, vec2<float> size, float _max_health, aabb collide_box,
         entity(pos),
         animated_sprite(pos, size, frame_res, {{size.x / 2, size.y / 2}}, image_src, animation_lengths, 0.1),
         collidable_entity(pos, collide_box),
-        interactible(8, 8, 16),
+        interactible(size.x / 2, size.y / 2, 16),
         position_initiale(pos),
         objectif(pos),
         max_health(_max_health),
@@ -83,8 +83,8 @@ void pnj::damage(float damage_value) {
     current_health = std::max(current_health - damage_value, 0.f);
 }
 
-void pnj::heal(float benefit_value) {
-    current_health = std::min(benefit_value + current_health, max_health);
+void pnj::heal(float heal_value) {
+    current_health = std::min(heal_value + current_health, max_health);
 }
 
 float pnj::get_max_health() const {

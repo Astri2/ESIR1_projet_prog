@@ -12,7 +12,7 @@ fusee::fusee(vec2<float> pos, vec2<float> size, float max_health) :
         entity(pos),
         animated_sprite(pos, size, {{48, 48}}, {{size.x / 2, size.y / 2}}, "../resources/fusee.png", {1, 1, 2, 2, 2}, 0.1),
         collidable_entity(pos, aabb{20, 39, 41, 9}),
-        interactible(24, 30, 16),
+        interactible(24, 30, 20),
         max_health(max_health), current_health(0.f) {
 }
 
@@ -47,7 +47,7 @@ void fusee::update(float dt) {
 }
 
 void fusee::benefit(float benefit_value) {
-    this->current_health += benefit_value;
+    current_health = std::min(heal_value + current_health, max_health);
 }
 
 float fusee::get_max_health() const {
