@@ -101,7 +101,46 @@ void map::load(const char* file)
                              }, .8f, 2.f, p);
             }
             break;
+            case serializer::map_row::entity_type::cow: {
+                // init cow
+                cow *m_cow = new cow(row.position, {{32.0f, 32.0f}}, 100);
 
+                clusters[idx].foreground.insert(m_cow);
+                clusters[idx].collidables.insert(m_cow);
+                clusters[idx].interactibles.insert(m_cow);
+            }
+            break;
+
+            case serializer::map_row::entity_type::fusee:
+            {
+                    // init fusee
+                    fusee * m_cow = new fusee(row.position, {{48.0f, 48.0f}}, 100);
+
+                    clusters[idx].foreground.insert(m_cow);
+                    clusters[idx].collidables.insert(m_cow);
+                    clusters[idx].interactibles.insert(m_cow);
+            }
+            break;
+
+            case serializer::map_row::entity_type::wheat:
+            {
+                // init wheat
+                wheat_crop * m_wheat = new wheat_crop(row.position, {{16.0f, 16.0f}});
+
+                clusters[idx].foreground.insert(m_wheat);
+                clusters[idx].interactibles.insert(m_wheat);
+            }
+            break;
+
+            case serializer::map_row::entity_type::tomato:
+            {
+                // init tomato
+                tomato_crop * m_tomato = new tomato_crop(row.position, {{16.0f, 16.0f}});
+
+                clusters[idx].foreground.insert(m_tomato);
+                clusters[idx].interactibles.insert(m_tomato);
+            }
+            break;
         default:
             {
                 std::cerr << "unknown entity type in map !" << std::endl;
