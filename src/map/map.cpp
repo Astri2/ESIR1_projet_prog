@@ -65,6 +65,7 @@ void map::load(const char* file)
                         {{config::map::tile_width, config::map::tile_height}}, // ce que l'on veut afficher
                         {{row.tile.i, row.tile.j}},
                         {{16, 16}}, // ce qu'on lit dans le fichier
+                        {{config::map::tile_width/2, config::map::tile_height/2}},
                         texture_manager::atlases_name[(size_t)row.tile.atlas_id].c_str()
                     )
                 );
@@ -139,13 +140,16 @@ void map::draw()
             e->draw(cam);
         }
     }
+
+    std::set<sprite*, y_sort> all_to_blit;
     for (const cluster* c : cs)
     {
         for (sprite* e : c->foreground)
         {
-            e->draw(cam);
+            all_to_blit.insert(e);
         }
     }
+    for(sprite* e : all_to_blit) e->draw(cam);
 }
 
 void map::update(float dt)
