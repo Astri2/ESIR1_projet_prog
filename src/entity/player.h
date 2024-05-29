@@ -13,14 +13,18 @@ class player : public animated_sprite, public collidable_entity
 protected:
     const float max_health;
     float current_health;
+    const float max_food;
+    float current_food;
 
 public :
-    player(vec2<float> pos, vec2<float> size, float max_health);
+    player(vec2<float> pos, vec2<float> size, float max_health, float max_food);
     void update(float dt) override;
     void damage(float damage_value);
     void benefit(float benefit_value);
     float get_max_health() const;
     float get_current_health() const;
+    float get_max_food() const;
+    float get_current_food() const;
     circle get_interact_zone() const;
 
     void draw(const camera & cam) const override;

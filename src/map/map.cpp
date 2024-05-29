@@ -105,34 +105,35 @@ void map::load_wsv(const char* file)
         }
     }
 
-    for (; input_file.getline(buffer, 2048);)
-    {
+    for (; input_file.getline(buffer, 2048);) {
+
         csv_line line = read_csv_line(buffer);
         uint32_t idx = map::find_cluster_idx({{line.x, line.y}});
-        switch (line.type)
-        {
-        case csv_line::entity_type::tile:
-            {
+
+        switch (line.type) {
+
+            case csv_line::entity_type::tile: {
                 clusters[idx].background.push_back(new sprite({{line.x, line.y}},
                                                               {{config::map::tile_width, config::map::tile_height}},
                                                               {{0, 0}}, {{16, 16}}, "../resources/tiles/water.png"));
-            }
-            break;
-        case csv_line::entity_type::player_spawn:
-            {
-                // init player
-                p = new player({{line.x, line.y}}, {{48.0f, 48.0f}}, 100);
-                game::ui_components.push_back(new health_bar( {10, config::window::height - 25}, {123,21}, {0,0}, {41,7},"../resources/healthbar.png",p));
+            } break;
 
+            case csv_line::entity_type::player_spawn: {
+                // init player
+                p = new player({{line.x, line.y}}, {{48.0f, 48.0f}}, 100, 100);
+                health_bar * h = new health_bar( {10, config::window::height - 25}, {123,21}, {0,2}, {89,16},"../resources/bars.png",p);
+                game::ui_components.push_back(h);
+                game::ui_components.push_back(new food_bar( {10, config::window::height - 50}, {123,21}, {0,1}, {89,16},"../resources/bars.png",p));
 
                 clusters[idx].foreground.insert(p);
                 float offset_x = line.x - static_cast<float>(config::viewport::width) / 2.0f, offset_y = line.y - static_cast<float>(config::viewport::height) / 2.0f;
                 cam = camera({{ offset_x, offset_y }}, {{ static_cast<float>(config::viewport::width), static_cast<float>(config::viewport::height) }}, .8f, 2.f, p);
             } break;
+
             default: {
                 std::cerr << "unknown entity type in map !" << std::endl;
-            }
-            break;
+            } break;
+
         }
     }
 
