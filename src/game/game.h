@@ -15,7 +15,6 @@
 
 #include "entity/entity.h"
 #include "entity/interactible.h"
-#include "entity/player.h"
 
 #include "GUI/health_bar.h"
 #include "GUI/food_bar.h"
@@ -24,7 +23,6 @@
 class game : public context, public event::listener {
 public:
     enum class state {
-        quit,
         menu,
         game,
         game_over,

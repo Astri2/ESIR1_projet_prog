@@ -24,7 +24,7 @@ namespace event {
             }
         }
 
-        void append(int32_t code, void* context, void* context_2) {
+        void append(source code, void* context, void* context_2) {
             SDL_Event e;
             e.type = SDL_EventType ::SDL_USEREVENT;
             e.user.code = code;

@@ -28,7 +28,8 @@ void game::handle_event(const SDL_Event& event)
         running = false;
     } break;
     case SDL_EventType ::SDL_USEREVENT: {
-        if(event.user.code == player::event::died) current_state = state::game_over;
+        if(event.user.code == event::source::player) current_state = state::game_over;
+        else if(event.user.code == event::source::fusee) current_state = state::victory;
     } break;
     }
 }
@@ -43,7 +44,6 @@ void game::run() {
             case state::menu: update_menu(); break;
             case state::victory: update_victory(); break;
             case state::game_over: update_game_over(); break;
-            case state::quit: return;
         }
     }
 }
@@ -107,7 +107,7 @@ void game::update_game_over() {
         renderer::present();
         SDL_Delay(10);
     }
-    current_state = state::quit;
+    running = false;
 }
 
 void game::update_victory() {
@@ -133,5 +133,5 @@ void game::update_victory() {
         renderer::present();
         SDL_Delay(10);
     }
-    current_state = state::quit;
+    running = false;
 }

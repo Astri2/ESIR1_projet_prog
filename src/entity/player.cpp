@@ -46,7 +46,7 @@ void player::update(float dt) {
     damage(dt * 10.0f);
     if(current_health <= 0.0f) {
         // notifier l'application que le joueur est mort
-        ::event::manager::append((int32_t)player::event::died);
+        event::manager::append(event::source::player);
     }
 
     // perdre de la nourriture
@@ -130,7 +130,3 @@ float player::get_current_health() const { return current_health; }
 
 float player::get_max_food() const { return max_food; }
 float player::get_current_food() const { return current_food; }
-
-
-bool operator==(int32_t val, player::event e) { return val == (int32_t)e; }
-bool operator==(player::event e, int32_t val) { return val == e; }

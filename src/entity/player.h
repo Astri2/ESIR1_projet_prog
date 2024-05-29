@@ -17,10 +17,6 @@ protected:
     float current_food;
 
 public:
-    enum class event : uint8_t {
-        died
-    };
-
     uint32_t tick;
 
 public :
@@ -43,6 +39,3 @@ public :
     circle get_interact_zone() const;
 
 };
-
-bool operator==(int32_t val, player::event e);
-bool operator==(player::event e, int32_t val);
