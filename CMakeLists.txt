@@ -82,6 +82,8 @@ set(exec
         src/entity/wheat_crop.h
         src/GUI/food_bar.cpp
         src/GUI/food_bar.h
+        src/entity/fusee.cpp
+        src/entity/fusee.h
 
 )
 
