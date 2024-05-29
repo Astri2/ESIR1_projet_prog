@@ -30,6 +30,7 @@ public :
     float get_current_health() const;
 
     void collect(float collect_value);
+
     void lose(float lose_value);
 
     float get_max_food() const;

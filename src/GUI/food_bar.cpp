@@ -11,8 +11,7 @@ food_bar::food_bar(vec2<float> _position, vec2<float> _size, vec2<uint32_t> _spr
           current_food(100.0f), max_food(p->get_max_food()) {
 }
 
-void food_bar::draw(const camera& cam) const
-{
+void food_bar::draw(const camera &cam) const {
     float food_width = (current_food / max_food) * (30 * 3);
 
 
