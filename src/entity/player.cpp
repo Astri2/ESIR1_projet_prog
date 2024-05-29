@@ -40,7 +40,7 @@ void player::update(float dt) {
     tick = map::map_tick;
 
     animated_sprite::update(dt);
-    damage(dt);
+    damage(dt * 10.0f);
     if(current_health <= 0.0f) {
         ::event::manager::append((int32_t)player::event::died);
     }

@@ -79,9 +79,53 @@ void game::update_menu() {
 }
 
 void game::update_game_over() {
+    for(uint8_t alpha = 0; alpha < 255; alpha++) {
+        map::draw();
+        renderer::draw_rect(0, 0, config::window::width, config::window::height, renderer::color{ 0, 0, 0, alpha });
+        SDL_Texture* game_over_message = renderer::create_sdl_texture("../resources/failure_txt.png");
+        const struct {
+            float x, y;
+        } ratio = {
+                (970.0f / config::window::width),
+                (98.0f / config::window::height),
+        };
+        float dest_text_width = ((float)config::window::width / 2.0f) * ratio.x;
+        float dest_text_height = ((float)config::window::height / 2.0f) * ratio.y;
+        renderer::draw_texture(
+                {{ (((float)config::window::width / 2.0f) - (dest_text_width / 2.0f)), (((float)config::window::height / 2.0f) - (dest_text_height / 2.0f)) }},
+                {{ dest_text_width, dest_text_height }},
+                {{ 970, 98 }},
+                game_over_message,
+                {{0, 0}}
+        );
+        renderer::present();
+        SDL_Delay(10);
+    }
     current_state = state::quit;
 }
 
 void game::update_victory() {
+    for(uint8_t alpha = 0; alpha < 255; alpha++) {
+        map::draw();
+        renderer::draw_rect(0, 0, config::window::width, config::window::height, renderer::color{ 0, 0, 0, alpha });
+        SDL_Texture* game_over_message = renderer::create_sdl_texture("../resources/victory_txt.png");
+        const struct {
+            float x, y;
+        } ratio = {
+                (970.0f / config::window::width),
+                (98.0f / config::window::height),
+        };
+        float dest_text_width = ((float)config::window::width / 2.0f) * ratio.x;
+        float dest_text_height = ((float)config::window::height / 2.0f) * ratio.y;
+        renderer::draw_texture(
+                {{ (((float)config::window::width / 2.0f) - (dest_text_width / 2.0f)), (((float)config::window::height / 2.0f) - (dest_text_height / 2.0f)) }},
+                {{ dest_text_width, dest_text_height }},
+                {{ 970, 98 }},
+                game_over_message,
+                {{0, 0}}
+        );
+        renderer::present();
+        SDL_Delay(10);
+    }
     current_state = state::quit;
 }
