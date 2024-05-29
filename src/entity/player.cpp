@@ -13,11 +13,12 @@
 #include "map/map.h"
 #include "physics/physics.h"
 
-player::player(vec2<float> pos, vec2<float> size, float max_health):
+player::player(vec2<float> pos, vec2<float> size, float max_health, float max_food):
     entity(pos),
     animated_sprite(pos, size, {{48, 48}}, "../resources/player.png", {4}, 0.1),
     collidable_entity(pos, aabb{24, 28, 32, 20}),
-    max_health(max_health), current_health(max_health)
+    max_health(max_health), current_health(max_health),
+    max_food(max_food), current_food(max_food)
 {
 }
 
@@ -100,4 +101,14 @@ float player::get_max_health() const
 float player::get_current_health() const
 {
     return current_health;
+}
+
+float player::get_max_food() const
+{
+    return max_food;
+}
+
+float player::get_current_food() const
+{
+    return current_food;
 }
