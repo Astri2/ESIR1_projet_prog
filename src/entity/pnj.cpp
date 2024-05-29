@@ -6,15 +6,16 @@
 #include "pnj.h"
 #include "map/map.h"
 
-pnj::pnj(vec2<float> pos, vec2<float> size, float max_health) :
+pnj::pnj(vec2<float> pos, vec2<float> size, float _max_health) :
         entity(pos),
         animated_sprite(pos, size, {{32, 32}}, {{size.x/2, size.y}}, "../resources/cow.png", {3, 3, 2}, 0.1),
         collidable_entity(pos, aabb{24, 24, 32, 8}),
         interactible(16, 16, 32),
-        max_health(max_health),
         position_initiale(pos),
         objectif(pos),
-        current_health(max_health)
+        max_health(_max_health),
+        current_health(_max_health),
+        tick(0.)
 {}
 
 void pnj::draw(const camera& cam) const
@@ -33,9 +34,12 @@ circle pnj::get_interact_zone() const
 
 void pnj::update(float dt)
 {
+    if(tick == map::map_tick) return;
+    tick = map::map_tick;
+
     animated_sprite::update(dt);
 
-    vec2<float> dir = (position - objectif);
+    vec2<float> dir = (objectif - position);
 
     const float speed = 10;
 
@@ -44,13 +48,10 @@ void pnj::update(float dt)
         float rng1 = rand()/32767.f-0.5;
         float rng2 = rand()/32767.f-0.5;
 
-        objectif = {{position_initiale.x  + 50, position_initiale.y + 0 }};
+        objectif = {{position_initiale.x  + 100*rng1, position_initiale.y + 100*rng2 }};
         return;
     };
     dir = dir.normalize();
-
-    std::cout <<dir.x<<std::endl;
-    std::cout <<dir.y<<std::endl;
 
 
     uint32_t idx = map::find_cluster_idx(get_position());

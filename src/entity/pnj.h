@@ -17,8 +17,10 @@ protected:
     const float max_health;
     float current_health;
 
+    uint32_t tick;
+
 public:
-    pnj(vec2<float> pos, vec2<float> size, float max_health);
+    pnj(vec2<float> pos, vec2<float> size, float _max_health);
 
     void update(float dt) override;
     void damage(float damage_value);
