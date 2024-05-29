@@ -11,25 +11,25 @@
 #include "animated_sprite.h"
 #include "collidable_entity.h"
 #include "interactible.h"
+#include "pnj.h"
 
-class cow : public animated_sprite, public collidable_entity, public interactible
-{
+class cow : public pnj {
 protected:
-    const float max_health;
-    float current_health;
     float max_delai_interact = 2.0f;
     float delai_interact = max_delai_interact;
 
 public :
     cow(vec2<float> pos, vec2<float> size, float max_health);
+
     void update(float dt) override;
+
     void damage(float damage_value);
     void heal(float benefit_value);
+
     float get_max_health() const;
     float get_current_health() const;
-    circle get_interact_zone() const override;
 
-    void draw(const camera& cam) const override;
+    circle get_interact_zone() const override;
 
     void interact(player* user) override;
 };

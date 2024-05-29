@@ -17,7 +17,20 @@ game::game(unsigned int _width, unsigned int _height)
 }
 
 game::~game() {
-    for (auto component : ui_components) delete component;
+    for (auto component: ui_components) delete component;
+}
+
+void game::handle_event(const SDL_Event& event)
+{
+    switch (event.type)
+    {
+    case SDL_EventType::SDL_QUIT: {
+        running = false;
+    } break;
+    case SDL_EventType ::SDL_USEREVENT: {
+        if(event.user.code == player::event::died) current_state = state::game_over;
+    } break;
+    }
 }
 
 void game::run() {
@@ -35,19 +48,6 @@ void game::run() {
     }
 }
 
-void game::handle_event(const SDL_Event& event)
-{
-    switch (event.type)
-    {
-    case SDL_EventType::SDL_QUIT: {
-        running = false;
-    } break;
-    case SDL_EventType ::SDL_USEREVENT: {
-        if(event.user.code == player::event::died) current_state = state::game_over;
-    } break;
-    }
-}
-
 void game::update_game() {
     event::manager::update();
 
@@ -59,18 +59,28 @@ void game::update_game() {
         component->update(dt);
     }
 
+    uint32_t start_tick = SDL_GetTicks();
+    float dt = static_cast<float>(static_cast<double>(start_tick - previous_tick) / 1000.0);
+
+    event::manager::update();
+    map::update(dt);
+    for (auto component: ui_components) {
+        component->update(dt);
+    }
+
     /* Render Pass */
     renderer::clear(0, 0, 0);
     map::draw();
-    for (auto component : ui_components) {
+    for (auto component: ui_components) {
         component->draw(map::cam);
     }
+    // menus
 
     renderer::present();
 
     previous_tick = start_tick;
-    if(config::tick_time > dt) SDL_Delay((uint32_t)(config::tick_time - dt)*1000);
-    else std::cout << "can't keep it up (" << dt-config::tick_time << " seconds behind)\n";
+    if (config::tick_time > dt) SDL_Delay((uint32_t) (config::tick_time - dt) * 1000);
+    else std::cout << "can't keep it up (" << dt - config::tick_time << " seconds behind)\n";
 }
 
 void game::update_menu() {

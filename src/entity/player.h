@@ -9,8 +9,7 @@
 #include "animated_sprite.h"
 #include "collidable_entity.h"
 
-class player : public animated_sprite, public collidable_entity
-{
+class player : public animated_sprite, public collidable_entity {
 protected:
     const float max_health;
     float current_health;
@@ -26,10 +25,14 @@ public:
 
 public :
     player(vec2<float> pos, vec2<float> size, float max_health, float max_food);
-    void update(float dt) override;
 
-    void heal(float benefit_value);
+    void update(float dt) override;
+    void draw(const camera &cam) const override;
+
     void damage(float damage_value);
+    void heal(float heal_value);
+    void lose(float lose_value);
+    void collect(float collect_value);
 
     float get_max_health() const;
     float get_current_health() const;
@@ -39,7 +42,6 @@ public :
 
     circle get_interact_zone() const;
 
-    void draw(const camera & cam) const override;
 };
 
 bool operator==(int32_t val, player::event e);
