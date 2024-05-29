@@ -125,7 +125,7 @@ void map::load(const char *file) {
 
             case serializer::map_row::entity_type::fusee: {
                 // init fusee
-                fusee *m_cow = new fusee(row.position, {{48.0f, 48.0f}}, 100);
+                fusee *m_cow = new fusee(row.position, {{48.0f, 48.0f}}, 50);
 
                 clusters[idx].foreground.insert(m_cow);
                 clusters[idx].collidables.insert(m_cow);
