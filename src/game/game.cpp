@@ -52,15 +52,12 @@ void game::update_game() {
     event::manager::update();
 
     uint32_t start_tick = SDL_GetTicks();
-    float dt = static_cast<float>(static_cast<double>(start_tick - previous_tick)/1000.0);
+    float dt = static_cast<float>(static_cast<double>(start_tick - previous_tick) / 1000.0);
 
     map::update(dt);
     for (auto component : ui_components) {
         component->update(dt);
     }
-
-    uint32_t start_tick = SDL_GetTicks();
-    float dt = static_cast<float>(static_cast<double>(start_tick - previous_tick) / 1000.0);
 
     event::manager::update();
     map::update(dt);
@@ -74,7 +71,6 @@ void game::update_game() {
     for (auto component: ui_components) {
         component->draw(map::cam);
     }
-    // menus
 
     renderer::present();
 

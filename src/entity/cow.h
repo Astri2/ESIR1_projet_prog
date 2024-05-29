@@ -1,7 +1,6 @@
 //
 // Created by tomch on 28/05/2024.
 //
-
 #pragma once
 
 #include "physics/circle.h"
@@ -28,8 +27,6 @@ public :
 
     float get_max_health() const;
     float get_current_health() const;
-
-    circle get_interact_zone() const override;
 
     void interact(player* user) override;
 };
