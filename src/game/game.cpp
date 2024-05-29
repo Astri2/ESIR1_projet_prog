@@ -112,15 +112,15 @@ void game::update_victory() {
         const struct {
             float x, y;
         } ratio = {
-                (970.0f / config::window::width),
-                (98.0f / config::window::height),
+                (697.0f / config::window::width),
+                (135.0f / config::window::height),
         };
         float dest_text_width = ((float)config::window::width / 2.0f) * ratio.x;
         float dest_text_height = ((float)config::window::height / 2.0f) * ratio.y;
         renderer::draw_texture(
                 {{ (((float)config::window::width / 2.0f) - (dest_text_width / 2.0f)), (((float)config::window::height / 2.0f) - (dest_text_height / 2.0f)) }},
                 {{ dest_text_width, dest_text_height }},
-                {{ 970, 98 }},
+                {{ 697, 135 }},
                 game_over_message,
                 {{0, 0}}
         );
