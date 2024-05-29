@@ -13,8 +13,7 @@
 #include "interactible.h"
 #include "pnj.h"
 
-class cow : public pnj
-{
+class cow : public pnj {
 protected:
     float max_delai_interact = 2.0f;
     float delai_interact = max_delai_interact;
@@ -24,5 +23,5 @@ public :
 
     void update(float dt) override;
 
-    void interact(player* user) override;
+    void interact(player *user) override;
 };
