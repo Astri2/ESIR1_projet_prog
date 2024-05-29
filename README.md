@@ -15,7 +15,7 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://gitlab.istic.univ-rennes1.fr/cejosso/projet_programmation.git
+git remote add origin https://gitlab.istic.univ-rennes1.fr//projet_programmation.git
 git branch -M main
 git push -uf origin main
 ```
