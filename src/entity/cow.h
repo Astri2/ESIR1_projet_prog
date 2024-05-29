@@ -37,7 +37,13 @@ public :
         {
             sprite_offset.y = 1;
             delai_interact = 0;
-            user->benefit(10.f);
+            if (user->get_current_food() >= 10.0f) {
+                user->lose(10.f);
+            }
         }
-    }
+
+
+
+        }
+    
 };

@@ -20,12 +20,18 @@ protected:
 public :
     player(vec2<float> pos, vec2<float> size, float max_health, float max_food);
     void update(float dt) override;
+
     void damage(float damage_value);
     void benefit(float benefit_value);
     float get_max_health() const;
     float get_current_health() const;
+
     float get_max_food() const;
     float get_current_food() const;
+    void collect(float collect_value);
+    void lose(float lose_value);
+
+
     circle get_interact_zone() const;
 
     void draw(const camera & cam) const override;
