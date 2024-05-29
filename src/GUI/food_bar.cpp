@@ -11,7 +11,7 @@ food_bar::food_bar(vec2<float> _position, vec2<float> _size, vec2<int> _sprite_o
 void food_bar::draw(const camera& cam) const {
     float food_width = (current_food / max_food) * (29*3);
 
-    renderer::draw_rect(position.x+10*3, position.y+2*3, food_width, 3*3, renderer::colors::red);
+    renderer::draw_rect(position.x+9*3, position.y+2*3, food_width, 3*3, renderer::colors::beige);
     renderer::draw_texture({position.x, position.y}, {size.width, size.height},sprite_resolution, texture, sprite_offset);
 }
 
