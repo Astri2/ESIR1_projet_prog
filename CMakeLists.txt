@@ -80,6 +80,8 @@ set(exec
         src/entity/crop.cpp
         src/entity/crop.h
         src/entity/wheat_crop.h
+        src/GUI/food_bar.cpp
+        src/GUI/food_bar.h
 
 )
 
