@@ -1,10 +1,9 @@
 //
 // Created by tomch on 28/05/2024.
 //
-#include <fstream>
+
 #include <iostream>
 
-#include <cstring> // memset 0
 #include <vector>
 
 #include "map.h"
@@ -83,11 +82,11 @@ void map::load(const char* file)
             {
                 // init player
                 p = new player(row.position, {{48.0f, 48.0f}}, 100, 100);
-                health_bar* h = new health_bar({10, config::window::height - 25}, {123, 21}, {0, 2}, {89, 16},
+                health_bar* h = new health_bar({{10, config::window::height - 25}}, {{123, 21}}, {0, 2}, {89, 16},
                                                "../resources/bars.png", p);
                 game::ui_components.push_back(h);
-                game::ui_components.push_back(new food_bar({10, config::window::height - 50}, {123, 21}, {0, 1},
-                                                           {89, 16}, "../resources/bars.png", p));
+                game::ui_components.push_back(new food_bar({{10, config::window::height - 50}}, {{123, 21}}, {0, 1},
+                                                           {{89, 16}}, "../resources/bars.png", p));
 
                 clusters[idx].foreground.insert(p);
                 float offset_x = row.position.x - static_cast<float>(config::viewport::width) / 2.0f, offset_y = row.
@@ -149,24 +148,6 @@ void map::load(const char* file)
         }
     }
 
-/*
-    vec2<float> pos = {{1000, 1000}};
-
-    uint32_t idx = map::find_cluster_idx(pos);
-    fusee* m_cow = new fusee(pos, {{48.0f, 48.0f}}, 100);
-    clusters[idx].foreground.insert(m_cow);
-    clusters[idx].collidables.insert(m_cow);
-    clusters[idx].interactibles.insert(m_cow);
-
-
-    vec2<float> pos2 = {{1055, 1055}};
-
-    uint32_t idx2 = map::find_cluster_idx(pos2);
-    cow* m_cow2 = new cow(pos2, {{32.0f, 32.0f}}, 100);
-    clusters[idx2].foreground.insert(m_cow2);
-    clusters[idx2].collidables.insert(m_cow2);
-    clusters[idx2].interactibles.insert(m_cow2);
-    */
 }
 
 void map::draw()
@@ -255,12 +236,12 @@ std::vector<cluster const*> get_cluster_to_blit(const camera& camera)
     return res;
 }
 
-interactible* map::perceive(player* user, std::vector<cluster*> clusters)
+interactible* map::perceive(player* user, const std::vector<cluster*> & cs)
 {
     interactible* nearest = nullptr;
     float nearest_dist = 0.0f;
 
-    for (cluster* c : clusters)
+    for (cluster* c : cs)
     {
         for (interactible* objet : c->interactibles)
         {

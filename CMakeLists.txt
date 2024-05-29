@@ -91,6 +91,8 @@ set(exec
         
         src/texture_manager.h
         src/texture_manager.cpp
+        src/entity/pnj.cpp
+        src/entity/pnj.h
 )
 
 # SDL2_image sources

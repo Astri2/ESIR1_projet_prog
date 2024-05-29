@@ -26,6 +26,6 @@ namespace map
     uint32_t find_cluster_idx(const vec2<float>& position);
     std::vector<cluster*> get_surrounding_clusters(uint32_t cluster_idx);
 
-    interactible* perceive(player* user, std::vector<cluster*> clusters);
+    interactible* perceive(player* user, const std::vector<cluster*> & clusters);
 
 } // namespace map
