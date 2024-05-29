@@ -16,6 +16,7 @@ namespace event {
     namespace manager {
 
         void update();
+        void append(int32_t code, void* context = nullptr, void* context_2 = nullptr);
 
     } // namespace manager
 

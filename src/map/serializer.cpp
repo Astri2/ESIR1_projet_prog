@@ -43,6 +43,10 @@ namespace serializer {
             case map_row::entity_type::animated_tile: {
                 file >> row.animated_tile.animation_id;
             } break;
+
+            case map_row::entity_type::player: /* nothing else to load */ break;
+
+            case map_row::entity_type::count: assert(false && "What THE FUCK !!! C'est NON !"); break;
         }
 
         return row;
