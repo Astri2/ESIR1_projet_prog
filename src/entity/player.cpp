@@ -43,7 +43,7 @@ void player::update(float dt) {
     animated_sprite::update(dt);
 
     // perdre de la vie
-    damage(dt * 10.0f);
+    damage(dt);
     if(current_health <= 0.0f) {
         // notifier l'application que le joueur est mort
         event::manager::append(event::source::player);
