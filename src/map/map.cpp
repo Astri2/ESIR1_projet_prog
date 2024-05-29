@@ -107,7 +107,7 @@ void map::load(const char* file)
         }
     }
 
-
+/*
     vec2<float> pos = {{1000, 1000}};
 
     uint32_t idx = map::find_cluster_idx(pos);
@@ -124,6 +124,7 @@ void map::load(const char* file)
     clusters[idx2].foreground.insert(m_cow2);
     clusters[idx2].collidables.insert(m_cow2);
     clusters[idx2].interactibles.insert(m_cow2);
+    */
 }
 
 void map::draw()
