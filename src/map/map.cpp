@@ -75,7 +75,7 @@ void map::load(const char *file) {
 
             case serializer::map_row::entity_type::player: {
                 // init player
-                p = new player(row.position, {{48.0f, 48.0f}}, 100, 100);
+                p = new player(row.position, {{48.0f, 48.0f}}, 100, 100, 100);
                 health_bar *h = new health_bar({{10, config::window::height - 25}}, {{123, 21}}, {0, 2}, {89, 16},
                                                "../resources/bars.png", p);
                 game::ui_components.push_back(h);

@@ -22,7 +22,7 @@ public:
     uint32_t tick;
 
 public :
-    player(vec2<float> pos, vec2<float> size, float max_health, float max_food);
+    player(vec2<float> pos, vec2<float> size, float max_health, float max_food, float max_copper);
 
     void update(float dt) override;
     void draw(const camera &cam) const override;

@@ -14,7 +14,7 @@
 #include "map/map.h"
 #include "physics/physics.h"
 
-player::player(vec2<float> pos, vec2<float> size, float max_health, float max_food) :
+player::player(vec2<float> pos, vec2<float> size, float max_health, float max_food, float max_copper) :
         entity(pos),
         animated_sprite(pos, size, {{48, 48}}, {{size.x / 2, size.y / 2}}, "../resources/player.png",
                         {4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
@@ -22,8 +22,8 @@ player::player(vec2<float> pos, vec2<float> size, float max_health, float max_fo
                         0.1),
         collidable_entity(pos, aabb{24, 28, 32, 20}),
         max_health(max_health), current_health(max_health),
-        max_food(max_food), current_food(max_food),
-        max_copper(100), current_copper(0),
+        max_food(max_food), current_food(0),
+        max_copper(max_copper), current_copper(0),
         tick(0) {
 }
 
@@ -52,7 +52,7 @@ void player::update(float dt) {
     }
 
     // perdre de la nourriture
-    lose_food(dt);
+    //lose_food(dt);
     bool actioned = input::is_key_pressed(SDL_SCANCODE_E);
 
     vec2<float> dir{{0, 0}};
