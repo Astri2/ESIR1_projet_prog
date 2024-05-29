@@ -3,8 +3,9 @@
 //
 #pragma once
 
-#include "physics/circle.h"
 #include <cstdint>
+
+#include "physics/circle.h"
 #include "animated_sprite.h"
 #include "collidable_entity.h"
 
@@ -17,14 +18,16 @@ protected:
     const float max_copper;
     float current_copper;
 
+public:
     uint32_t tick;
+
 public :
     player(vec2<float> pos, vec2<float> size, float max_health, float max_food);
 
     void update(float dt) override;
+    void draw(const camera &cam) const override;
 
     void damage(float damage_value);
-
     void heal(float heal_value);
 
     float get_max_health() const;
@@ -36,7 +39,6 @@ public :
     void lose_food(float lose_value);
 
     float get_max_food() const;
-
     float get_current_food() const;
 
     void collect_copper(float collect_value);
@@ -49,5 +51,4 @@ public :
 
     circle get_interact_zone() const;
 
-    void draw(const camera &cam) const override;
 };
