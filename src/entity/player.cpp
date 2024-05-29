@@ -2,7 +2,6 @@
 // Created by celia on 27/05/2024.
 //
 #include <algorithm>
-#include <iostream>
 
 #include "player.h"
 
@@ -19,7 +18,8 @@ player::player(vec2<float> pos, vec2<float> size, float max_health, float max_fo
                     0.1),
     collidable_entity(pos, aabb{24, 28, 32, 20}),
     max_health(max_health), current_health(max_health),
-    max_food(max_food), current_food(max_food)
+    max_food(max_food), current_food(max_food),
+    tick(0)
 {
 }
 
@@ -37,6 +37,9 @@ circle player::get_interact_zone() const
 
 void player::update(float dt)
 {
+    if(tick == map::map_tick) return;
+    tick = map::map_tick;
+
     animated_sprite::update(dt);
     damage(dt);
 

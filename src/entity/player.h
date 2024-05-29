@@ -16,6 +16,7 @@ protected:
     const float max_food;
     float current_food;
 
+    uint32_t tick;
 public :
     player(vec2<float> pos, vec2<float> size, float max_health, float max_food);
     void update(float dt) override;

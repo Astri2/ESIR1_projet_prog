@@ -43,6 +43,7 @@ void cow::update(float dt)
         delai_interact += dt;
     }
 
+    return;
     vec2<float> dir{{1, 0}};
 
     const float speed = 10;

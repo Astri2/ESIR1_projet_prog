@@ -21,9 +21,11 @@
 
 camera map::cam;
 player* map::p;
+uint32_t map::map_tick = 0;
 
 std::vector<cluster> map::clusters;
 static unsigned int nb_clusters_x, nb_clusters_y;
+
 
 static std::vector<cluster const*> get_cluster_to_blit(const camera& camera);
 
@@ -147,6 +149,7 @@ void map::draw()
 
 void map::update(float dt)
 {
+    map::map_tick = SDL_GetTicks();
     std::vector<const cluster*> cs = get_cluster_to_blit(cam);
     for (const cluster* c : cs)
     {
