@@ -1,35 +1,33 @@
 //
-// Created by tomch on 28/05/2024.
+// Created by tomch on 29/05/2024.
 //
 
 #pragma once
-
-#include "physics/circle.h"
-#include <cstdint>
-#include <iostream>
-
 #include "animated_sprite.h"
 #include "collidable_entity.h"
 #include "interactible.h"
 
-class cow : public animated_sprite, public collidable_entity, public interactible
+
+class fusee : public animated_sprite, public collidable_entity, public interactible
 {
 protected:
     const float max_health;
     float current_health;
-    float max_delai_interact = 2.0f;
-    float delai_interact = max_delai_interact;
 
 public :
-    cow(vec2<float> pos, vec2<float> size, float max_health);
+    fusee(vec2<float> pos, vec2<float> size, float max_health);
+
     void update(float dt) override;
     void damage(float damage_value);
-    void heal(float benefit_value);
+    void benefit(float benefit_value);
     float get_max_health() const;
     float get_current_health() const;
     circle get_interact_zone() const override;
 
     void draw(const camera& cam) const override;
 
-    void interact(player* user) override;
+    void interact(player* user) override
+    {
+        sprite_offset.y = 1;
+    }
 };
