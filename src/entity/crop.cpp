@@ -5,9 +5,9 @@
 #include "crop.h"
 
 crop::crop(vec2<float> pos, vec2<float> size, uint32_t y_offset):
-entity(pos),
-sprite(pos, size,{{1, y_offset}}, {{16, 16}}, {{size.x/2, size.y}}, "../resources/plants.png"),
-interactible(8, 8, 16)
+    entity(pos),
+    sprite(pos, size,{{1, static_cast<uint32_t>(y_offset)}}, {{16, 16}}, {{size.x/2, size.y}}, "../resources/plants.png"),
+    interactible(8, 8, 16)
 {}
 
 void crop::update(float dt)
