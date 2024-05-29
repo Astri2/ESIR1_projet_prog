@@ -188,7 +188,8 @@ void map::draw()
             all_to_blit.insert(e);
         }
     }
-    for(sprite* e : all_to_blit) e->draw(cam);
+    for(sprite* e : all_to_blit)
+        e->draw(cam);
 }
 
 void map::update(float dt)
@@ -197,13 +198,13 @@ void map::update(float dt)
     std::vector<const cluster*> cs = get_cluster_to_blit(cam);
     for (const cluster* c : cs)
     {
-        for (entity* e : c->background)
+        for (sprite* e : c->background)
         {
             e->update(dt);
         }
 
         auto foreground_copy(c->foreground);
-        for (entity* e : foreground_copy)
+        for (sprite* e : foreground_copy)
         {
             e->update(dt);
         }

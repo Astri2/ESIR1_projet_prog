@@ -11,7 +11,7 @@
 
 cow::cow(vec2<float> pos, vec2<float> size, float max_health):
     entity(pos),
-    animated_sprite(pos, size, {{32, 32}}, {{size.x/2, size.y}}, "../resources/cow.png", {3, 3, 2}, 0.1),
+    animated_sprite(pos, size, {{32, 32}}, {{size.x/2, size.y/2}}, "../resources/cow.png", {3, 3, 2}, 0.1),
     collidable_entity(pos, aabb{24, 24, 32, 8}),
     interactible(16, 16, 32),
     max_health(max_health), current_health(max_health)
