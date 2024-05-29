@@ -21,21 +21,6 @@ void fusee::draw(const camera &cam) const {
     renderer::draw_rect(transformed.x, transformed.y, transformed.width, transformed.height,
                         renderer::color{210, 132, 86, 255});
     sprite::draw(cam);
-//    aabb abs = collide_box + position;
-//
-//    vec4<float> monrect = cam.transform({{abs.left, abs.top}}, {{abs.right - abs.left, abs.bottom - abs.top}});
-//
-//    renderer::draw_rect(monrect.x, monrect.y, monrect.width, monrect.height);
-
-
-    //interactible::draw_interact_zone(cam, position);
-//    collidable_entity::draw_collide_box(cam);
-//    float rocket_bar_width = (current_health / max_health) * 33;
-//    vec4<float> rect = cam.transform({{position.x, position.y}}, {{size.width, size.height}});
-//
-////    renderer::draw_rect(position.x + 9 * 3, position.y + 2 * 3, health_width, 3 * 3, renderer::colors::red);
-//    renderer::draw_rect(rect.x, rect.y, rect.width, rect.height, renderer::color{210, 132, 86});
-//    renderer::draw_rect(position.x, position.y, rocket_bar_width, 3, renderer::color{210, 132, 86});
 }
 
 circle fusee::get_interact_zone() const {
@@ -47,7 +32,7 @@ void fusee::update(float dt) {
 }
 
 void fusee::benefit(float benefit_value) {
-    current_health = std::min(heal_value + current_health, max_health);
+    current_health = std::min(benefit_value + current_health, max_health);
 }
 
 float fusee::get_max_health() const {
