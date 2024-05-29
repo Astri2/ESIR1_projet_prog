@@ -18,6 +18,8 @@
 
 #include "serializer.h"
 #include "entity/chicken.h"
+#include "entity/copper.h"
+#include "GUI/copper_bar.h"
 
 camera map::cam;
 player *map::p;
@@ -81,6 +83,11 @@ void map::load(const char *file) {
                 game::ui_components.push_back(new food_bar({{10, config::window::height - 50}}, {{123, 21}}, {0, 1},
                                                            {{89, 16}}, "../resources/bars.png", p));
 
+                game::ui_components.push_back(h);
+                game::ui_components.push_back(new copper_bar({{10, config::window::height - 75}}, {{123, 21}}, {0, 0},
+                                                           {{89, 16}}, "../resources/bars.png", p));
+
+
                 clusters[idx].foreground.insert(p);
                 float offset_x = row.position.x - static_cast<float>(config::viewport::width) / 2.0f, offset_y = row.
                         position.y -
@@ -132,6 +139,15 @@ void map::load(const char *file) {
                 clusters[idx].interactibles.insert(m_wheat);
             }
                 break;
+
+            case serializer::map_row::entity_type::copper: {
+                // init wheat
+                copper *m_copper = new copper(row.position, {{16.0f, 16.0f}});
+
+                clusters[idx].foreground.insert(m_copper);
+                clusters[idx].interactibles.insert(m_copper);
+            }
+            break;
 
             case serializer::map_row::entity_type::tomato: {
                 // init tomato

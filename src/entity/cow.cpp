@@ -30,5 +30,6 @@ void cow::interact(player *user) {
         sprite_offset.y = 1;
         delai_interact = 0;
         user->heal(10.f);
+        user->lose_food(10.f);
     }
 }

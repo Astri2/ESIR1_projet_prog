@@ -21,6 +21,7 @@ player::player(vec2<float> pos, vec2<float> size, float max_health, float max_fo
         collidable_entity(pos, aabb{24, 28, 32, 20}),
         max_health(max_health), current_health(max_health),
         max_food(max_food), current_food(max_food),
+        max_copper(100), current_copper(0),
         tick(0) {
 }
 
@@ -40,7 +41,7 @@ void player::update(float dt) {
 
     animated_sprite::update(dt);
     damage(dt);
-    lose(dt);
+    lose_food(dt);
 
     bool actioned = input::is_key_pressed(SDL_SCANCODE_E);
 
@@ -122,12 +123,12 @@ float player::get_current_health() const {
     return current_health;
 }
 
-void player::collect(float collect_value) {
-    current_food = std::max(current_health - collect_value, 0.f);
+void player::lose_food(float lose_value) {
+    current_food = std::max(current_food - lose_value, 0.f);
 }
 
-void player::lose(float lose_value) {
-    current_food = std::min(lose_value + current_health, max_health);
+void player::collect_food(float collect_value) {
+    current_food = std::min(collect_value + current_food, max_food);
 }
 
 float player::get_max_food() const {
@@ -136,4 +137,21 @@ float player::get_max_food() const {
 
 float player::get_current_food() const {
     return current_food;
+}
+
+
+void player::lose_copper(float lose_value) {
+    current_copper = std::max(current_copper - lose_value, 0.f);
+}
+
+void player::collect_copper(float collect_value) {
+    current_copper = std::min(collect_value + current_copper, max_copper);
+}
+
+float player::get_max_copper() const {
+    return max_copper;
+}
+
+float player::get_current_copper() const {
+    return current_copper;
 }
