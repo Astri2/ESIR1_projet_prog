@@ -33,11 +33,11 @@ public :
 
     void interact(player* user) override
     {
-        if ( delai_interact >= max_delai_interact) {
+        if (delai_interact >= max_delai_interact)
+        {
             sprite_offset.y = 1;
             delai_interact = 0;
-            user -> benefit(10.f);
+            user->benefit(10.f);
         }
-
     }
 };

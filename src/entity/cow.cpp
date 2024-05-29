@@ -11,7 +11,7 @@
 
 cow::cow(vec2<float> pos, vec2<float> size, int max_health):
     entity(pos),
-    animated_sprite(pos, size, {{32, 32}}, "../resources/cow.png", {3,3,2}, 0.1),
+    animated_sprite(pos, size, {{32, 32}}, "../resources/cow.png", {3, 3, 2}, 0.1),
     collidable_entity(pos, aabb{24, 24, 32, 8}),
     interactible(16, 16, 32),
     max_health(max_health), current_health(max_health)
@@ -34,10 +34,12 @@ void cow::update(float dt)
 {
     animated_sprite::update(dt);
 
-    if (delai_interact >= max_delai_interact) {
+    if (delai_interact >= max_delai_interact)
+    {
         sprite_offset.y = 0;
     }
-    else {
+    else
+    {
         delai_interact += dt;
     }
 
@@ -59,13 +61,15 @@ void cow::update(float dt)
     if (!colx) move(dposx.x, 0);
     if (!coly) move(0, dposy.y);
 
-    if(!(colx && coly)) {
+    if (!(colx && coly))
+    {
         unsigned int new_idx = map::find_cluster_idx(get_position());
-        
+
         map::clusters[idx].foreground.erase(this);
         map::clusters[new_idx].foreground.insert(this);
 
-        if(idx != new_idx) {
+        if (idx != new_idx)
+        {
             map::clusters[idx].collidables.erase(this);
             map::clusters[new_idx].collidables.insert(this);
 

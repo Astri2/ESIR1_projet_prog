@@ -15,7 +15,8 @@
 
 player::player(vec2<float> pos, vec2<float> size, float max_health, float max_food):
     entity(pos),
-    animated_sprite(pos, size, {{48, 48}}, "../resources/player.png", {4,4,4,4,2,2,2,2,2,2,2,2,2,2,2,2}, 0.1),
+    animated_sprite(pos, size, {{48, 48}}, "../resources/player.png", {4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
+                    0.1),
     collidable_entity(pos, aabb{24, 28, 32, 20}),
     max_health(max_health), current_health(max_health),
     max_food(max_food), current_food(max_food)
@@ -34,7 +35,8 @@ circle player::get_interact_zone() const
     return interact_zone + get_position();
 }
 
-void player::update(float dt){
+void player::update(float dt)
+{
     animated_sprite::update(dt);
     damage(dt);
 
@@ -45,14 +47,32 @@ void player::update(float dt){
     const float speed = 50;
     if (sprite_offset.y < 4)
     {
-        if (input::is_key_pressed(SDL_SCANCODE_A)) { dir.x -= 1; sprite_offset.y = 2; }
-        if (input::is_key_pressed(SDL_SCANCODE_D)) { dir.x += 1; sprite_offset.y = 3; }
-        if (input::is_key_pressed(SDL_SCANCODE_W)) { dir.y -= 1; sprite_offset.y = 1; }
-        if (input::is_key_pressed(SDL_SCANCODE_S)) { dir.y += 1; sprite_offset.y = 0; }
+        if (input::is_key_pressed(SDL_SCANCODE_A))
+        {
+            dir.x -= 1;
+            sprite_offset.y = 2;
+        }
+        if (input::is_key_pressed(SDL_SCANCODE_D))
+        {
+            dir.x += 1;
+            sprite_offset.y = 3;
+        }
+        if (input::is_key_pressed(SDL_SCANCODE_W))
+        {
+            dir.y -= 1;
+            sprite_offset.y = 1;
+        }
+        if (input::is_key_pressed(SDL_SCANCODE_S))
+        {
+            dir.y += 1;
+            sprite_offset.y = 0;
+        }
     }
-    else {
-        if (sprite_offset.x >= 1) {
-            sprite_offset= {0,0};
+    else
+    {
+        if (sprite_offset.x >= 1)
+        {
+            sprite_offset = {0, 0};
         }
     }
 
@@ -65,7 +85,11 @@ void player::update(float dt){
     {
         interactible* cc = map::perceive(this, m_clusters);
 
-        if (cc != nullptr) { cc->interact(this); sprite_offset.y = 4; };
+        if (cc != nullptr)
+        {
+            cc->interact(this);
+            sprite_offset.y = 4;
+        };
     }
 
     if (dir.x == 0 && dir.y == 0) return;
@@ -79,17 +103,17 @@ void player::update(float dt){
     if (!colx) move(dposx.x, 0);
     if (!coly) move(0, dposy.y);
 
-    if(!(colx && coly)) {
+    if (!(colx && coly))
+    {
         unsigned int new_idx = map::find_cluster_idx(get_position());
         map::clusters[idx].foreground.erase(this);
         map::clusters[new_idx].foreground.insert(this);
-        if(idx != new_idx) {
+        if (idx != new_idx)
+        {
             map::clusters[idx].collidables.erase(this);
             map::clusters[new_idx].collidables.insert(this);
         }
     }
-
-
 }
 
 void player::damage(float damage_value)
