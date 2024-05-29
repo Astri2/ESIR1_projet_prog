@@ -93,6 +93,8 @@ set(exec
         src/texture_manager.cpp
         src/entity/pnj.cpp
         src/entity/pnj.h
+        src/entity/chicken.cpp
+        src/entity/chicken.h
 )
 
 # SDL2_image sources
