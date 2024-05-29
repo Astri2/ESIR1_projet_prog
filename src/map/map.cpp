@@ -17,6 +17,7 @@
 #include "game/game.h"
 
 #include "serializer.h"
+#include "entity/chicken.h"
 
 camera map::cam;
 player* map::p;
@@ -109,6 +110,16 @@ void map::load(const char* file)
                 clusters[idx].interactibles.insert(m_cow);
             }
             break;
+
+            case serializer::map_row::entity_type::chicken: {
+                // init cow
+                chicken *m_chicken = new chicken(row.position, {{16.0f, 16.0f}}, 100);
+
+                clusters[idx].foreground.insert(m_chicken);
+                clusters[idx].collidables.insert(m_chicken);
+                clusters[idx].interactibles.insert(m_chicken);
+            }
+                break;
 
             case serializer::map_row::entity_type::fusee:
             {

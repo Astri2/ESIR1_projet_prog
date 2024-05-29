@@ -25,7 +25,7 @@ player::player(vec2<float> pos, vec2<float> size, float max_health, float max_fo
 
 void player::draw(const camera& cam) const
 {
-    collidable_entity::draw_collide_box(cam);
+    //collidable_entity::draw_collide_box(cam);
     sprite::draw(cam);
 }
 

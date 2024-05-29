@@ -6,11 +6,11 @@
 #include "pnj.h"
 #include "map/map.h"
 
-pnj::pnj(vec2<float> pos, vec2<float> size, float _max_health) :
+pnj::pnj(vec2<float> pos, vec2<float> size, float _max_health, aabb collide_box, vec2<uint32_t> frame_res,const char * image_src, std::vector<uint32_t> animation_lengths)  :
         entity(pos),
-        animated_sprite(pos, size, {{32, 32}}, {{size.x/2, size.y}}, "../resources/cow.png", {3, 3, 2}, 0.1),
-        collidable_entity(pos, aabb{24, 24, 32, 8}),
-        interactible(16, 16, 32),
+        animated_sprite(pos, size, frame_res, {{size.x/2, size.y}}, image_src, animation_lengths, 0.1),
+        collidable_entity(pos, collide_box),
+        interactible(8, 8, 16),
         position_initiale(pos),
         objectif(pos),
         max_health(_max_health),

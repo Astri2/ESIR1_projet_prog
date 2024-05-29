@@ -20,8 +20,8 @@ protected:
     uint32_t tick;
 
 public:
-    pnj(vec2<float> pos, vec2<float> size, float _max_health);
 
+    pnj(vec2<float> pos, vec2<float> size, float _max_health, aabb collide_box, vec2<uint32_t> frame_res,const char * image_src, std::vector<uint32_t> animation_lengths) ;
     void update(float dt) override;
     void damage(float damage_value);
     void heal(float benefit_value);

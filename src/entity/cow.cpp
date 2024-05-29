@@ -10,7 +10,7 @@
 
 cow::cow(vec2<float> pos, vec2<float> size, float max_health) :
         entity(pos),
-        pnj(pos,size,max_health)
+        pnj(pos,size,max_health,aabb{24, 24, 32, 8},{{32, 32}},"../resources/cow.png",{3, 3, 2})
 {}
 
 void cow::update(float dt) {

@@ -27,7 +27,7 @@ namespace serializer {
             fusee,
             wheat,
             tomato,
-
+            chicken,
             count,
         } type;
 
